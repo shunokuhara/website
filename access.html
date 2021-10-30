@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Shun's|Shun Okuhara</title>
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/jquery.smoothscroll.js"></script>
+<script type="text/javascript" src="js/jquery.scrollshow.js"></script>
+<script type="text/javascript" src="js/jquery.rollover.js"></script>
+<script>
+$(function($){
+	if ($('#spMenu').css('display') == 'block') {
+		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('header')});
+	} else {
+		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('nav')});
+	}
+	$('.totop').scrollshow({position : 500});
+});
+</script>
+<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+<body>
+<header>
+	<div class="inner">
+		<h1><a href="index.html"><img src="images/logo.png" alt="サイト名"></a></h1>
+		<!--<p class="summary">
+		この箇所はホームページの説明文など記載するのに最適です。
+		</p>-->
+	</div><!-- /.inner -->
+</header>
+
+<div id="spMenu"><span id="navBtn"><span id="navBtnIcon"></span></span></div>
+<nav>
+	<div class="inner">
+		<ul class="gnav">
+			<li><a href="index.html">ホーム</a></li>
+			<li><a href="research.html">研究概要</a></li>
+			<li><a href="achievement.html">業績リスト</a></li>
+			<li><a href="funding.html">研究費・表彰</a></li>
+			<li><a href="guide.html">担当科目・研究指導</a></li>
+			<li><a href="access.html">連絡先</a></li>
+		</ul>
+	</div><!-- /.inner -->
+</nav>
+
+<div id="contents">
+	<div id="topicpath"><a href="index.html">トップ</a> &gt;連絡先</div><!-- /#topicpath -->
+	<h3>連絡先</h3>
+	<h5>所在地</h5>
+	<ul><li>〒606-8501<br>　京都市左京区吉田本町 京都大学大学院 情報学研究科</li></ul>
+	
+	<h5>コンタクト</h5>
+	<ul>
+	<li>　メールアドレス：okuhara(at)i.kyoto-u.ac.jp ※ (at) は @ に置き換えて下さい。</li></ul>
+	
+	<h5>研究室へのアクセス(京都大学 7号館 427号室)</h5>
+	<ul>
+	<li><p><div class="google-map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d816.7968033519828!2d135.7821667712501!3d35.02704611439354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001085626a411a3%3A0x70a2e13e53d9064!2z57eP5ZCI56CU56m2N-WPt-mkqA!5e0!3m2!1sja!2sjp!4v1604642479765!5m2!1sja!2sjp" width="500" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div></p></li>
+	</ul>
+	
+</div><!-- /#contents -->
+
+<footer>
+	<div class="copyright">Copyright &#169; 2020-2021  Shun Okuhara.</div><!-- /.copyright -->
+</footer>
+
+<div class="totop"><a href="#"><img src="images/totop.png" alt="ページのトップへ戻る"></a></div><!-- /.totop -->
+</body>
+</html>
