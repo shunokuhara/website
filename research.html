@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Shun's|Shun Okuhara</title>
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/jquery.smoothscroll.js"></script>
+<script type="text/javascript" src="js/jquery.scrollshow.js"></script>
+<script type="text/javascript" src="js/jquery.rollover.js"></script>
+<script>
+$(function($){
+	if ($('#spMenu').css('display') == 'block') {
+		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('header')});
+	} else {
+		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('nav')});
+	}
+	$('.totop').scrollshow({position : 500});
+});
+</script>
+<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+<body>
+<header>
+	<div class="inner">
+		<h1><a href="index.html"><img src="images/logo.png" alt="サイト名"></a></h1>
+		<!--<p class="summary">
+		この箇所はホームページの説明文など記載するのに最適です。
+		</p>-->
+	</div><!-- /.inner -->
+</header>
+
+<div id="spMenu"><span id="navBtn"><span id="navBtnIcon"></span></span></div>
+<nav>
+	<div class="inner">
+		<ul class="gnav">
+			<li><a href="index.html">ホーム</a></li>
+			<li><a href="research.html">研究概要</a></li>
+			<li><a href="achievement.html">業績リスト</a></li>
+			<li><a href="funding.html">研究費・表彰</a></li>
+			<li><a href="guide.html">担当科目・研究指導</a></li>
+			<li><a href="access.html">連絡先</a></li>
+		</ul>
+	</div><!-- /.inner -->
+</nav>
+
+<div id="contents">
+	<div id="topicpath"><a href="index.html">トップ</a> &gt; 研究概要<a href = "research.html"></a></div><!-- /#topicpath -->
+	<h3>研究概要</h3>
+	<ul>
+	<li>　情報工学の技術、とくに人工知能の技術がどのような学習の支援が人間に対して最適であるのかに関して興味を持って研究活動を行っています。 研究活動は主に２つの研究軸を考えております。 １つめは人工知能が学習者の知識を自動で把握し、膨大な量の世の中に溢れている情報から学習者が求めている疑問の回答を提示する研究です。具体的には、議論の対話情報から誤って理解している単語の解説を行うオートチューター（対話エージェント）の技術などから指導者の補助支援を行なっております。2つ目は人工知能が学習者の感情を把握することで、学習者に適切な表現を用いて学習支援する手法の確立を目指しています。具体的には、学習者同士の議論による対立の防止を対話データから分析し、学習者同士の結論がまとまるように支援します。</li>
+		</ul>
+
+		<h5>オートチューターに関する研究</h5>
+		
+		<ul>
+	<li>　学習者に単語を説明するシステムはITS(Intelligent tutoring system)と呼ばれ、1980年代から研究として進められています。研究はITSの中でも自然言語で人間との会話を保持する知的な指導システムであるAuto tutorの概念を用いて学習支援を行います。AutoTutorによる学習は，質問に対して学習者が回答する対話形式になってます。AutoTutorとは自然言語処理を用いてユーザに対して質問を行い、学習者が回答を返すことで学習支援を行うソフトウェアであり、アクティブラーニングなど能動的な学習を進める現在の日本には今後として必要になる学習支援の技術です。</li>
+		</ul>
+		
+		
+
+
+</div><!-- /#contents -->
+
+<footer>
+	<div class="copyright">Copyright &#169; 2017-2018  Shun Okuhara.</div><!-- /.copyright -->
+</footer>
+
+<div class="totop"><a href="#"><img src="images/totop.png" alt="ページのトップへ戻る"></a></div><!-- /.totop -->
+</body>
+</html>
