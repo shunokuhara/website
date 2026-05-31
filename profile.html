@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プロフィール | 奥原 俊（三重大学）</title>
+  <meta name="description" content="奥原 俊（Shun Okuhara／三重大学 大学院工学研究科 講師）のプロフィール。学位・経歴・略歴・受賞・学会活動を掲載。" />
+  <style>
+    :root {
+      --navy: #12304f; --blue: #1f6fb2; --light-blue: #eef6ff; --gray: #f5f7fa;
+      --text: #1d2733; --muted: #65758b; --border: #d8e0ea; --white: #ffffff; --accent: #d79a2b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif; color: var(--text); line-height: 1.75; background: var(--white); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1000px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.02em; }
+    .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
+    .nav .contact-link { background: var(--navy); color: var(--white); padding: 8px 14px; border-radius: 999px; }
+
+    .page-hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
+    .page-hero-inner { max-width: 1000px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: center; }
+    .ph-photo { border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--border); box-shadow: 0 18px 44px rgba(18,48,79,0.12); }
+    .ph-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 18%; }
+    .ph-name { font-size: clamp(28px,4vw,40px); color: var(--navy); margin: 0 0 6px; letter-spacing: -0.02em; }
+    .ph-en { color: var(--muted); margin: 0 0 14px; }
+    .ph-affil { color: var(--text); margin: 0 0 4px; font-weight: 700; }
+    .ph-affil small { display:block; font-weight: 400; color: var(--muted); margin-top: 2px; }
+    .ph-back { display:inline-block; margin-top: 18px; font-size: 14px; color: var(--blue); font-weight: 700; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    h2 { color: var(--navy); font-size: 24px; margin: 0 0 6px; }
+    .label { color: var(--blue); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .lead { color: #34455b; max-width: 760px; }
+
+    .timeline { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+    .timeline li { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; background: var(--gray); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; }
+    .timeline .yr { color: var(--blue); font-weight: 700; font-size: 13px; white-space: nowrap; min-width: 140px; }
+    .timeline .body { flex: 1 1 320px; }
+    .timeline .body small { display: block; color: var(--muted); font-size: 13px; }
+
+    .award-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .award-list li { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 12px 14px; }
+    .award-list .yr { color: var(--accent); font-weight: 700; font-size: 12px; }
+    .award-list .nm { color: var(--navy); font-weight: 700; display: block; }
+    .award-list .ds { color: var(--muted); font-size: 13px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { background: var(--light-blue); color: var(--navy); border-radius: 999px; padding: 6px 12px; font-size: 14px; font-weight: 600; }
+
+    .cv-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 16px; border-radius: 999px; font-weight: 700; border: 1px solid var(--border); background: var(--white); color: var(--navy); }
+    .button.primary { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    .footer { padding: 26px 24px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .ph-photo { max-width: 200px; }
+      .award-list { grid-template-columns: 1fr; }
+      .timeline .yr { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        奥原 俊 研究室
+        <span>Mie University / Okuhara Laboratory</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="index.html">ホーム</a>
+        <a href="index.html#research">研究</a>
+        <a href="index.html#lectures">講演</a>
+        <a href="profile.html" aria-current="page" style="color:var(--blue);font-weight:700;">プロフィール</a>
+        <a class="contact-link" href="index.html#contact">問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero" style="padding:0;border-bottom:none;">
+      <div class="page-hero-inner">
+        <div class="ph-photo"><img src="img/profile-main.jpg" alt="奥原俊のプロフィール写真" /></div>
+        <div>
+          <div class="label">Profile</div>
+          <h1 class="ph-name">奥原 俊</h1>
+          <p class="ph-en">Shun Okuhara ／ 博士（工学）</p>
+          <p class="ph-affil">三重大学 大学院工学研究科 情報工学専攻 講師
+            <small>名古屋大学 高等研究院 招聘研究員</small>
+          </p>
+          <a class="ph-back" href="index.html">← ホームに戻る</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section>
+        <div class="label">Biography</div>
+        <h2>略歴</h2>
+        <p class="lead">
+          自動交渉・マルチエージェントシステムを基盤に、大規模言語モデル（LLM）を用いた合意形成支援と意思決定支援を研究しています。説明可能な交渉エージェント、AIによる議論・熟議の支援、高齢者の意思決定支援、AI for Science などに取り組み、カナダ（カールトン大学・NRC）をはじめとする国際共同研究も展開。研究成果を講演・セミナー・産学連携を通じて社会に発信しています。
+        </p>
+      </section>
+
+      <section>
+        <div class="label">Degrees</div>
+        <h2>学位・学歴</h2>
+        <ul class="timeline">
+          <li><span class="yr">2020年3月</span><span class="body">博士（工学）<small>名古屋工業大学 大学院工学研究科 情報工学専攻</small></span></li>
+          <li><span class="yr">2013年3月</span><span class="body">修士（工学）<small>名古屋工業大学 大学院工学研究科 産業戦略工学専攻</small></span></li>
+          <li><span class="yr">2009年3月</span><span class="body">学士<small>名古屋工業大学 工学部 電気情報工学科</small></span></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">Career</div>
+        <h2>経歴</h2>
+        <ul class="timeline">
+          <li><span class="yr">2022年3月 – 現在</span><span class="body">三重大学 大学院工学研究科 講師</span></li>
+          <li><span class="yr">2023年12月 – 2024年4月</span><span class="body">カールトン大学 客員教授</span></li>
+          <li><span class="yr">2023年6月 – 2024年3月</span><span class="body">三重大学 DX・AI研究センター長</span></li>
+          <li><span class="yr">2020年12月 – 2022年2月</span><span class="body">京都大学 大学院情報学研究科 社会情報学専攻 特定助教</span></li>
+          <li><span class="yr">2020年4月 – 2020年12月</span><span class="body">名古屋工業大学 大学院工学研究科 特任教員（助教）</span></li>
+          <li><span class="yr">2015年10月 – 2020年9月</span><span class="body">名古屋工業大学 コレクティブインテリジェンス研究所 プロジェクト助教</span></li>
+          <li><span class="yr">2015年4月 – 2020年3月</span><span class="body">藤田保健衛生大学（現・藤田医科大学） 医療科学部 助教</span></li>
+          <li><span class="yr">2011年4月 – 2014年3月</span><span class="body">名古屋工業大学 グリーンコンピューティング研究所 プロジェクト助教</span></li>
+          <li><span class="yr">2010年4月 – 2012年3月</span><span class="body">大同大学大同高等学校 機械科 非常勤講師</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">Awards</div>
+        <h2>受賞</h2>
+        <ul class="award-list">
+          <li><span class="yr">2023.12</span><span class="nm">優秀論文賞</span><span class="ds">第8回 国際ICT利用研究学会全国大会</span></li>
+          <li><span class="yr">2023.11</span><span class="nm">Best Paper Award</span><span class="ds">DemocrAI2023（PRICAI 2023）</span></li>
+          <li><span class="yr">2023.9</span><span class="nm">IAR 2023 Outstanding Paper Award</span><span class="ds">Int'l Conference on ICT Application Research</span></li>
+          <li><span class="yr">2023.6</span><span class="nm">優秀賞</span><span class="ds">電子情報通信学会 第2回 合意と共創 研究会</span></li>
+          <li><span class="yr">2022.9</span><span class="nm">最優秀賞</span><span class="ds">京都大学サマーデザインスクール 2022</span></li>
+          <li><span class="yr">2020.11</span><span class="nm">Best Paper Award</span><span class="ds">KICSS 2020（会話AIによるSDGs達成）</span></li>
+          <li><span class="yr">2020.2</span><span class="nm">学長表彰（学術活動部門）</span><span class="ds">名古屋工業大学</span></li>
+          <li><span class="yr">2019.9</span><span class="nm">Special Leadership Award</span><span class="ds">IEEE/ACIS SNPD 2019</span></li>
+          <li><span class="yr">2019.7</span><span class="nm">Best Paper Award</span><span class="ds">IEEE/ACIS SNPD 2019</span></li>
+          <li><span class="yr">2018.12</span><span class="nm">優秀研究発表賞</span><span class="ds">第3回 国際ICT利用研究学会全国大会</span></li>
+        </ul>
+        <div class="cv-links">
+          <a class="button" href="https://researchmap.jp/okuhara_shun/awards" target="_blank" rel="noopener">受賞一覧（researchmap）</a>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">Academic Activities</div>
+        <h2>学会活動</h2>
+        <p class="lead" style="margin-bottom:6px;">所属学会</p>
+        <div class="chips">
+          <span class="chip">情報処理学会</span>
+          <span class="chip">電子情報通信学会</span>
+          <span class="chip">人工知能学会</span>
+          <span class="chip">ISLS</span>
+          <span class="chip">日本感性工学会</span>
+          <span class="chip">IEEE</span>
+        </div>
+        <p class="lead" style="margin:24px 0 6px;">国際会議の委員等</p>
+        <ul class="timeline">
+          <li><span class="yr">2020</span><span class="body">Program Chair<small>KICSS 2020（The 15th Int'l Conference on Knowledge, Information and Creativity Support Systems）</small></span></li>
+          <li><span class="yr">2020</span><span class="body">Financial, Sponsorship and Local Arrangements Chair<small>PRIMA 2020（The 23rd Int'l Conference on Principles and Practice of Multi-Agent Systems）</small></span></li>
+          <li><span class="yr">2019</span><span class="body">Program Chair<small>IEEE/ACIS SNPD 2019</small></span></li>
+          <li><span class="yr">2017</span><span class="body">Session Chair<small>KICSS 2017</small></span></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">CV / Publications</div>
+        <h2>業績・CV</h2>
+        <p class="lead">論文・国際会議発表・研究費等の詳細は researchmap に最新情報をまとめています。</p>
+        <div class="cv-links">
+          <a class="button primary" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener">researchmap</a>
+          <a class="button" href="achievement.html">業績リスト</a>
+          <a class="button" href="funding.html">研究費・表彰</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© 2026 Shun Okuhara, Okuhara Laboratory, Mie University</div>
+      <div><a href="index.html">ホーム</a></div>
+    </div>
+  </footer>
+</body>
+</html>

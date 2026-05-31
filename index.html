@@ -1,129 +1,431 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<title>Shun's|Shun Okuhara</title>
-<meta name="viewport" content="width=device-width">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/jquery.smoothscroll.js"></script>
-<script type="text/javascript" src="js/jquery.scrollshow.js"></script>
-<script type="text/javascript" src="js/jquery.rollover.js"></script>
-<script>
-$(function($){
-	if ($('#spMenu').css('display') == 'block') {
-		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('header')});
-	} else {
-		$('html').smoothscroll({easing : 'swing', speed : 1000, margintop : 10, headerfix : $('nav')});
-	}
-	$('.totop').scrollshow({position : 500});
-});
-</script>
-<!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/css3-mediaqueries.js"></script>
-<![endif]-->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奥原 俊 研究室 | AI・マルチエージェントによる合意形成と意思決定支援（三重大学）</title>
+  <meta name="description" content="三重大学大学院工学研究科 奥原 俊（講師）。AIエージェント、マルチエージェントシステム、大規模言語モデル（LLM）、自動交渉、合意形成支援、AI for Scienceに関する研究。講演・共同研究・取材のご相談を受け付けています。" />
+  <meta name="keywords" content="奥原俊, 三重大学, AIエージェント, マルチエージェント, LLM, 自動交渉, 合意形成, 意思決定支援, AI for Science, 講演依頼" />
+  <style>
+    :root {
+      --navy: #12304f;
+      --blue: #1f6fb2;
+      --light-blue: #eef6ff;
+      --gray: #f5f7fa;
+      --text: #1d2733;
+      --muted: #65758b;
+      --border: #d8e0ea;
+      --white: #ffffff;
+      --accent: #d79a2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
+      color: var(--text);
+      line-height: 1.75;
+      background: var(--white);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1160px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.02em; }
+    .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
+    .nav a { padding: 6px 0; }
+    .nav .contact-link { background: var(--navy); color: var(--white); padding: 8px 14px; border-radius: 999px; }
+
+    .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
+    .hero-inner { max-width: 1160px; margin: 0 auto; padding: 72px 24px 64px; display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 54px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 14px; padding: 8px 13px; border-radius: 999px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.18; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.03em; }
+    .hero-name { font-size: 17px; color: var(--navy); font-weight: 700; margin: 0 0 6px; }
+    .hero-affil { font-size: 14px; color: var(--muted); margin: 0 0 22px; }
+    .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border-radius: 999px; font-weight: 700; border: 1px solid transparent; }
+    .button.primary { background: var(--navy); color: var(--white); }
+    .button.secondary { background: var(--white); color: var(--navy); border-color: var(--border); }
+    .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .tag { font-size: 13px; color: var(--navy); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 5px 10px; }
+
+    .hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 28px; padding: 18px; box-shadow: 0 24px 60px rgba(18,48,79,0.12); }
+    .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: #e7edf5; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 18%; }
+    .photo-caption { padding: 14px 6px 2px; font-size: 14px; color: var(--muted); }
+
+    section { padding: 72px 24px; }
+    .container { max-width: 1160px; margin: 0 auto; }
+    .section-title { margin-bottom: 34px; }
+    .section-title .label { color: var(--blue); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .section-title h2 { margin: 8px 0 10px; font-size: clamp(28px, 4vw, 40px); color: var(--navy); line-height: 1.25; }
+    .section-title p { margin: 0; color: var(--muted); max-width: 760px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 22px; padding: 24px; min-height: 100%; }
+    .card h3 { margin: 0 0 12px; color: var(--navy); font-size: 20px; }
+    .card ul { margin: 0; padding-left: 1.2em; color: #34455b; }
+
+    .gray-section { background: var(--gray); }
+
+    .two-column { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 36px; align-items: start; }
+    .feature-box { background: var(--navy); color: var(--white); border-radius: 26px; padding: 30px; position: sticky; top: 92px; }
+    .feature-box h2 { margin: 0 0 12px; font-size: 28px; line-height: 1.35; }
+    .feature-box p { color: rgba(255,255,255,0.82); margin: 0; }
+
+    .activity-list { display: grid; gap: 14px; }
+    .activity { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 18px 20px; }
+    .activity time { color: var(--blue); font-size: 13px; font-weight: 700; }
+    .activity .badge { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 8px; vertical-align: middle; }
+    .activity h3 { margin: 4px 0 4px; font-size: 18px; color: var(--navy); }
+    .activity p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .pdf-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--blue); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; }
+    .pdf-link::before { content: "PDF"; font-size: 10px; letter-spacing: 0.04em; background: var(--blue); color: var(--white); border-radius: 4px; padding: 1px 5px; }
+    .pdf-link:hover { background: var(--light-blue); }
+
+    /* 業績・受賞・研究費：詳細はリンクのみ */
+    .records { background: var(--navy); color: var(--white); border-radius: 26px; padding: 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+    .records h2 { margin: 0 0 8px; font-size: 26px; }
+    .records p { margin: 0; color: rgba(255,255,255,0.82); max-width: 560px; }
+    .records .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .records .button.secondary { background: rgba(255,255,255,0.12); color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+    .lecture-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .lecture-card { background: var(--white); border: 1px solid var(--border); border-radius: 22px; padding: 24px; }
+    .lecture-card h3 { margin: 0 0 8px; color: var(--navy); }
+    .lecture-card p { margin: 0 0 14px; color: var(--muted); }
+    .audience { font-size: 13px; color: var(--blue); font-weight: 700; }
+
+    .track { margin-top: 36px; }
+    .track h3 { color: var(--navy); font-size: 18px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--light-blue); }
+    .track ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .track li { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+    .track .when { color: var(--blue); font-weight: 700; font-size: 13px; white-space: nowrap; }
+    .track .what { color: var(--text); flex: 1 1 320px; }
+    .track .what small { display: block; color: var(--muted); font-size: 13px; font-weight: 400; }
+
+    .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+    .photo-item { border-radius: 18px; overflow: hidden; background: #dfe7f0; border: 1px solid var(--border); }
+    .photo-item .frame { aspect-ratio: 4 / 3; background: #11243a; display: flex; align-items: center; justify-content: center; }
+    .photo-item .frame img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-item .frame.contain img { object-fit: contain; }
+    .photo-item figcaption { background: var(--white); padding: 12px 14px; font-size: 14px; color: var(--muted); }
+
+    .contact-section { background: linear-gradient(135deg, var(--navy), #17446e); color: var(--white); }
+    .contact-panel { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center; }
+    .contact-panel h2 { margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.25; }
+    .contact-panel p { margin: 0; color: rgba(255,255,255,0.82); }
+    .contact-box { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.24); border-radius: 22px; padding: 24px; }
+    .contact-box dl { margin: 0; }
+    .contact-box dt { font-size: 13px; color: rgba(255,255,255,0.7); }
+    .contact-box dd { margin: 4px 0 16px; font-weight: 700; }
+
+    .footer { padding: 26px 24px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .hero-inner, .two-column, .contact-panel, .records { grid-template-columns: 1fr; }
+      .cards, .lecture-grid, .photo-grid { grid-template-columns: 1fr; }
+      .feature-box { position: static; }
+      .records .links { justify-content: flex-start; }
+    }
+  </style>
 </head>
 <body>
-<header>
-	<div class="inner">
-		<h1><a href="index.html"><img src="images/logo.png" alt="サイト名"></a></h1>
-	</div><!-- /.inner -->
-</header>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="#top">
+        奥原 俊 研究室
+        <span>Mie University / Okuhara Laboratory</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="#research">研究</a>
+        <a href="#activities">活動</a>
+        <a href="#lectures">講演</a>
+        <a href="profile.html">プロフィール</a>
+        <a href="#photos">写真</a>
+        <a class="contact-link" href="#contact">問い合わせ</a>
+      </nav>
+    </div>
+  </header>
 
-<div id="spMenu"><span id="navBtn"><span id="navBtnIcon"></span></span></div>
-<nav>
-	<div class="inner">
-		<ul class="gnav">
-			<li><a href="index.html">ホーム</a></li>
-			<li><a href="research.html">研究概要</a></li>
-			<li><a href="achievement.html">業績リスト</a></li>
-			<li><a href="funding.html">研究費・表彰</a></li>
-			<li><a href="guide.html">担当科目・研究指導</a></li>
-			<li><a href="access.html">連絡先</a></li>
-		</ul>
-	</div><!-- /.inner -->
-</nav>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">AI Agent / Multi-Agent Systems / Human-AI Collaboration</div>
+          <h1>AI・マルチエージェントによる<br />合意形成と意思決定支援</h1>
+          <p class="hero-name">奥原 俊（Shun Okuhara）／ 博士（工学）</p>
+          <p class="hero-affil">三重大学 大学院工学研究科 情報工学専攻 講師／名古屋大学 高等研究院 招聘研究員</p>
+          <p class="hero-lead">
+            三重大学大学院工学研究科 奥原研究室では、AIエージェント、大規模言語モデル（LLM）、マルチエージェントシステムを用いて、人間とAIが協調する次世代社会システムを研究しています。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact">講演・共同研究の相談</a>
+            <a class="button secondary" href="#research">研究テーマを見る</a>
+          </div>
+          <div class="keyword-row" aria-label="研究キーワード">
+            <span class="tag">AIエージェント</span>
+            <span class="tag">LLM</span>
+            <span class="tag">合意形成</span>
+            <span class="tag">自動交渉</span>
+            <span class="tag">AI for Science</span>
+            <span class="tag">教育支援AI</span>
+          </div>
+        </div>
 
-<div id="contents">
-	<div id="topicpath"><a href="index.html">トップ</a> &gt; ホーム</div><!-- /#topicpath -->
-	<h2>奥原俊</h2>
-	<h3>所属</h3>
-	<ul>
-	<li>国立大学法人三重大学大学院 工学研究科 情報工学専攻/情報基盤センター・講師　</li>
-	<li>名古屋大学 名古屋大学 高等研究院　招聘研究員</li>		
-	</ul>
-	<h3>専門分野</h3>
-	<ul>
-	<li>教育工学・人工知能</li>
-	</ul>
-	<h3>学歴</h3>
-	<ol>
-	<!-- <li>[2001.4 - 2004.3]　愛知県立　名南工業高等学校　電気情報工学科</li>-->
-	<li>[2004.4 - 2009.3]　名古屋工業大学　工学部　電気情報工学科 卒業<学士><br>卒業研究：ユーザの嗜好を考慮した物々交換サイトの試作</li><!-- 論文名確認が必要 -->
-	<li>[2012.4 - 2013.3]　名古屋工業大学 大学院　工学研究科　産業戦略工学専攻　博士前期課程　＜修士（工学）＞<br>修士論文：グループ学習における学習ネットワークの効果に関する研究</li><!-- 論文名確認が必要 -->
-    <li>[2013.4 - 2020.3]　名古屋工業大学 大学院 工学研究科 情報工学専攻　＜博士（工学）＞<br>博士論文：エージェントの説明可能な交渉・協調モデルとその応用に関する研究</li> <!-- 2020年3月26日に卒業式 -->
-	
-</ol>
-	<h3>職歴</h3>
-	<ul>
-	<li>[2010.4 &nbsp;&nbsp;-&nbsp;&nbsp;2012.3]　学校法人　大同学園 大同大学大同高等学校 非常勤講師　機械科　非常勤講師</li> <!-- 年代確認が必要 -->
-	<li>[2011.4 &nbsp;&nbsp;-&nbsp;&nbsp;2014.3]　名古屋工業大学　グリーンコンピューティグ研究所 プロジェクト助教</li>
-	<li>[2011.4 &nbsp;&nbsp;-&nbsp;&nbsp;2012.3]　愛知県立　名南工業高等学校　電気科　非常勤講師</li><!-- 年代確認が必要 -->
-	<li>[2012.4 &nbsp;&nbsp;-&nbsp;&nbsp;2012.7]　愛知県立　名南工業高等学校　情報科　臨時的任用講師</li><!-- 年代確認が必要 -->
-	<li>[2012.8 &nbsp;&nbsp;-&nbsp;&nbsp;2014.3]　愛知県立　名南工業高等学校　定時制　機械科　臨時的任用講師</li><!-- 年代確認が必要 -->
-    <li>[2015.10 -&nbsp;&nbsp;2020.9]　名古屋工業大学　コレクティブインテリジェンス研究所　プロジェクト助教</li>
-    <li>[2015.4  &nbsp;&nbsp;-&nbsp;&nbsp;2020.3]　藤田保健衛生大学（現，藤田医科大学）　医療科学部　医療経営情報学科　医療情報領域　助教</li><!-- 退職は2020年3月31日 -->
-    <li>[2020.4 -&nbsp;&nbsp;2020.12.15]　国立大学法人名古屋工業大学　工学研究科　しくみ領域　国際連携情報学専攻/情報工学専攻　特任教員（助教）</li>
-<li>[2020.12.16 -&nbsp;&nbsp;2022.2.28]　国立大学法人京都大学大学院　情報学研究科　社会情報学専攻　社会情報ネットワーク講座　特定助教</li>
-    <li>[2021.4 -&nbsp;&nbsp;2024.3.31]　国立大学法人名古屋工業大学　工学研究科　NITech AI研究センター 客員助教</li>
-<li>[2022.3.1  &nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　国立大学法人三重大学大学院 工学研究科 情報工学専攻/情報基盤センター 講師</li>
-<!-- 情報工学専攻 知能工学講座 人間情報学教育研究分野 -->
-<li>[2022.2 -&nbsp;&nbsp;2024.2.29]　国立大学法人三重大学大学院 情報教育・研究機構 データサイエンス教育センター 講師</li>
-<li>[2023.6 -&nbsp;&nbsp;2024.3.31]　国立大学法人三重大学 DX・AI研究センター・センター長</li>
-<li>[2023.12.1 -&nbsp;&nbsp;2024.4.15]　カールトン大学 客員教授</li>
+        <aside class="hero-card" aria-label="プロフィール写真">
+          <div class="profile-photo">
+            <img src="img/profile-main.jpg" alt="奥原俊のプロフィール写真" />
+          </div>
+          <p class="photo-caption">
+            Shun Okuhara, Lecturer, Graduate School of Engineering, Mie University
+          </p>
+        </aside>
+      </div>
+    </section>
 
-				
-	</ul>
-	<h3>所属学会</h3>
-	<ul>
-	<li>[2012.6 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成24年6月 情報処理学会</li> <!-- №201200964 -->
-	<li>[2013.4 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成25年4月 電子情報通信学会</li> <!-- №1313320 -->
-	<li>[2013.4 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成25年4月 人工知能学会</li> <!-- №B329082 -->
-	<li>[2016.8 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成27年8月 ISLS</li> <!-- 698 -->
-	<li>[2018.3 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成29年3月 日本感性工学会</li> <!-- №21111 -->
-	<li>[2018.3 -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      ]　平成29年3月 IEEE</li> <!-- №94865229 -->
-	</ul>
+    <section id="research">
+      <div class="container">
+        <div class="section-title">
+          <div class="label">Research</div>
+          <h2>研究テーマ</h2>
+          <p>
+            中心となる研究軸は、AIによる合意形成支援と意思決定支援です。教育、医療・高齢者支援、研究支援などは、その応用分野として位置づけています。
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>AIによる合意形成支援</h3>
+            <ul>
+              <li>自動交渉エージェント</li>
+              <li>マルチエージェントシステム</li>
+              <li>社会的意思決定支援</li>
+              <li>合意案生成・評価</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>人間とAIの協調</h3>
+            <ul>
+              <li>LLMを用いた対話エージェント</li>
+              <li>AIによる議論支援</li>
+              <li>AIと人間の意思決定</li>
+              <li>Human-AI Collaboration</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>AIを活用した学習・研究支援</h3>
+            <ul>
+              <li>教育支援AI</li>
+              <li>自己調整学習支援</li>
+              <li>AI for Science</li>
+              <li>研究支援エージェント</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-	<h3>資格, 免許</h3>
-	<ul>
-	<li>高等学校教諭一種免許状　工業（愛知県教育委員会）, 2009年</li>
-	</ul>
-	<h3>国際会議の委員等</h3>
-	<ol>
-	<li>Program Chair, The 15th International Conference on Knowledge, Information and Creativity Support Systems (KICSS 2020),2020.11</li>
-	<li>Financial, Sponsorship and Local Arrangements Chair, The 23nd International Conference on Principles and Practice of Multi-Agent Systems (PRIMA 2020)</li>
-<!--<li>Program Chair, the 5th International Conference on Agents (ICA 2020),2020.7</li>-->
-	<li>Program Chair, 20th IEEE/ACIS International Conference on Software Engineering, Artificial Intelligence, Networking and Parallel/Distributed Computing (SNPD 2019), 2019</li><!-- July 8-10, 2019
-Toyama, Japan-->
-	<li>Session Chair, The 12th International Conference on Knowledge, Information and Creativity Support Systems (KICSS 2017),2017</li>
+    <section id="activities" class="gray-section">
+      <div class="container two-column">
+        <div class="feature-box">
+          <h2>研究成果を社会で議論できる形へ</h2>
+          <p>
+            論文・学会発表だけでなく、講演、セミナー、高校・地域連携、国際共同研究を通じて、AIが社会に与える影響を分かりやすく発信しています。
+          </p>
+        </div>
+        <div>
+          <div class="section-title">
+            <div class="label">Recent Activities</div>
+            <h2>最近の活動</h2>
+          </div>
+          <div class="activity-list">
+            <article class="activity">
+              <time>2026.3</time><span class="badge">登壇</span>
+              <h3>東北大学 オープンサイエンスセミナー「AI for Science」に登壇</h3>
+              <p>東北大学リサーチ・マネジメントセンター主催。京都大学 伊藤孝行教授とともに登壇し、「AI for Science時代のLLM活用戦略 ― 研究プロセスを再設計する実践知 ―」を講演。</p>
+              <a class="pdf-link" href="pdf/tohoku-ai-for-science-2026.pdf" target="_blank" rel="noopener">セミナーチラシ</a>
+            </article>
+            <article class="activity">
+              <time>2025.8</time><span class="badge">招待講演</span>
+              <h3>McGill大学・Mila との合同セミナーで招待講演</h3>
+              <p>モントリオールで開催された「Exploring Frontiers in AI」にて、交渉対話と効用値・LLMを用いた合意案生成（Agreement Generation from Negotiation Dialogues）について招待講演。</p>
+              <a class="pdf-link" href="pdf/mcgill-mila-seminar-2025.pdf" target="_blank" rel="noopener">セミナーポスター</a>
+            </article>
+            <article class="activity">
+              <time>2025.12</time>
+              <h3>IEEE ICA 2025（Agentic AI）で研究発表</h3>
+              <p>マッチングと交渉を統合する制約環境向けプロトコル「MBNP」を発表（査読付き）。</p>
+            </article>
+            <article class="activity">
+              <time>2023-2024</time>
+              <h3>カナダとの国際共同研究</h3>
+              <p>カールトン大学 客員教授、NRC Canada の研究者との共同研究を展開。</p>
+            </article>
+            <article class="activity">
+              <time>2023.8</time><span class="badge">メディア掲載</span>
+              <h3>教育家庭新聞「ICTキャンパス」で取り組みが紹介</h3>
+              <p>三重大学 数理・データサイエンス館（CeMDS）における学び合い型のデータサイエンス教育について、奥原のコメントが掲載されました。</p>
+              <a class="pdf-link" href="pdf/kyoiku-katei-shimbun-cemds-2023.pdf" target="_blank" rel="noopener">掲載記事</a>
+            </article>
+            <article class="activity">
+              <time>2022.11</time>
+              <h3>産学・地域連携セミナーで講演</h3>
+              <p>三十三銀行・三十三総研・三重大学・四日市商工会議所 主催の連携セミナーで、「IoTの次のステップ〜マルチエージェントと実応用〜」を講演（四日市商工会議所）。</p>
+              <a class="pdf-link" href="pdf/mie-industry-seminar-2022.pdf" target="_blank" rel="noopener">セミナーチラシ</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</ol>
-<ol>
-	<h3>国内会議の委員等</h3>
-	<li>実行委員, 第1回インダストリアルAIシンポジウム,2020.12.15 - 12.16</li>
-	<li>座長, 令和2年度電気・電子・情報関係学会東海支部連合大会,2020.9.3 - 9.4</li>
-</ol>
+    <section id="records">
+      <div class="container">
+        <div class="records">
+          <div>
+            <h2>業績・受賞・研究費</h2>
+            <p>査読付き論文、国際会議発表、受賞、科研費等の外部資金の一覧は、researchmap に最新の情報をまとめています。</p>
+          </div>
+          <div class="links">
+            <a class="button secondary" href="profile.html">プロフィール・経歴</a>
+            <a class="button secondary" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener">researchmapで見る</a>
+            <a class="button secondary" href="achievement.html">業績リスト</a>
+            <a class="button secondary" href="funding.html">研究費・表彰</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div><!-- /#contents -->
+    <section id="lectures" class="gray-section">
+      <div class="container">
+        <div class="section-title">
+          <div class="label">Talks / Seminars</div>
+          <h2>講演・セミナー可能テーマ</h2>
+          <p>
+            企業研修、大学FD、自治体・地域団体向けセミナー、学会・研究会、出前授業等に対応できます。
+          </p>
+        </div>
+        <div class="lecture-grid">
+          <article class="lecture-card">
+            <h3>AIエージェントは人間社会をどう変えるのか</h3>
+            <p>生成AI、LLM、自律型AIエージェントの動向と、仕事・研究・教育への影響を解説します。</p>
+            <div class="audience">対象：企業・大学・一般向け</div>
+          </article>
+          <article class="lecture-card">
+            <h3>AIによる合意形成と意思決定支援</h3>
+            <p>交渉AI、マルチエージェント、議論支援を通じて、AIが人間の意思決定をどう支援できるかを扱います。</p>
+            <div class="audience">対象：自治体・企業・研究会</div>
+          </article>
+          <article class="lecture-card">
+            <h3>AI for Science と研究自動化</h3>
+            <p>AIが研究計画、文献調査、実験支援、論文執筆をどう変えるかについて、研究者向けに整理します。</p>
+            <div class="audience">対象：大学・研究機関</div>
+          </article>
+          <article class="lecture-card">
+            <h3>生成AI時代の教育とAIリテラシー</h3>
+            <p>大学教育、データサイエンス教育、生成AIの活用と課題について、教育現場向けに解説します。</p>
+            <div class="audience">対象：高校・大学・教育機関</div>
+          </article>
+        </div>
 
-<footer>
-	<div class="copyright">Copyright &#169; 2017-2018  Shun Okuhara.</div><!-- /.copyright -->
-</footer>
+        <div class="track">
+          <h3>これまでの主な講演（例）</h3>
+          <ul>
+            <li>
+              <span class="when">2026.3</span>
+              <span class="what">東北大学 オープンサイエンスセミナー「AI for Science時代のLLM活用戦略 ― 研究プロセスを再設計する実践知 ―」<small>東北大学リサーチ・マネジメントセンター 主催</small></span>
+              <a class="pdf-link" href="pdf/tohoku-ai-for-science-2026.pdf" target="_blank" rel="noopener">チラシ</a>
+            </li>
+            <li>
+              <span class="when">2025.8</span>
+              <span class="what">Agreement Generation from Negotiation Dialogues Using Utility Values and LLMs<small>McGill大学・Mila「Exploring Frontiers in AI」（モントリオール）招待講演</small></span>
+              <a class="pdf-link" href="pdf/mcgill-mila-seminar-2025.pdf" target="_blank" rel="noopener">ポスター</a>
+            </li>
+            <li>
+              <span class="when">2022.11</span>
+              <span class="what">「IoTの次のステップ〜マルチエージェントと実応用〜」<small>三十三銀行・三十三総研・三重大学・四日市商工会議所 主催 連携セミナー</small></span>
+              <a class="pdf-link" href="pdf/mie-industry-seminar-2022.pdf" target="_blank" rel="noopener">チラシ</a>
+            </li>
+            <li>
+              <span class="when">2022.4</span>
+              <span class="what">三重大学 DS公開セミナー（第2回）「DXの浸透によるマルチエージェントシステムの実応用化について 〜分散AI技術の現状と課題〜」<small>情報教育専門委員会・情報教育研究機構 共催／全学FD</small></span>
+              <a class="pdf-link" href="img/ds-seminar-2022.jpg" target="_blank" rel="noopener">チラシ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<div class="totop"><a href="#"><img src="images/totop.png" alt="ページのトップへ戻る"></a></div><!-- /.totop -->
+    <section id="photos">
+      <div class="container">
+        <div class="section-title">
+          <div class="label">Photos</div>
+          <h2>活動の様子</h2>
+          <p>
+            講演や国際共同研究など、日々の研究活動の様子です。
+          </p>
+        </div>
+        <div class="photo-grid">
+          <figure class="photo-item">
+            <div class="frame"><img src="img/talk-photo.jpg" alt="研究会で発表する奥原俊" /></div>
+            <figcaption>講演・研究発表</figcaption>
+          </figure>
+          <figure class="photo-item">
+            <div class="frame"><img src="img/canada-collab.jpg" alt="海外研究者との研究会で議論する奥原俊" /></div>
+            <figcaption>国際共同研究・海外研究者との研究会</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="container contact-panel">
+        <div>
+          <h2>講演・共同研究・取材のご相談</h2>
+          <p>
+            AIエージェント、生成AI、AI for Science、合意形成支援、教育へのAI活用等に関する講演・セミナー・共同研究のご相談を受け付けています。メールにてお気軽にご連絡ください。
+          </p>
+          <p style="margin-top:16px;font-size:15px;">
+            講演をご依頼の際は、<strong>ご希望の日時・対象者・テーマ・謝金の有無</strong>をあわせてお知らせいただけると、スムーズにご回答できます。
+          </p>
+        </div>
+        <div class="contact-box">
+          <dl>
+            <dt>氏名</dt>
+            <dd>奥原 俊（Shun Okuhara）</dd>
+            <dt>所属</dt>
+            <dd>三重大学 大学院工学研究科 情報工学専攻 講師<br />名古屋大学 高等研究院 招聘研究員</dd>
+            <dt>所在地</dt>
+            <dd>〒514-8507 三重県津市栗真町屋町1577 三重大学 工学部6号館</dd>
+            <dt>E-mail</dt>
+            <dd>okuhara(at)info.mie-u.ac.jp<br /><span style="font-weight:400;font-size:12px;color:rgba(255,255,255,0.7)">※ (at) を @ に変えてお送りください</span></dd>
+          </dl>
+          <a class="button secondary" id="email-link" href="#contact">メールで問い合わせる</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© 2026 Shun Okuhara, Okuhara Laboratory, Mie University</div>
+      <div>AI・マルチエージェントによる合意形成と意思決定支援</div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var u = "okuhara", d = "info.mie-u.ac.jp";
+      var a = document.getElementById("email-link");
+      if (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "mailto:" + u + "@" + d;
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
