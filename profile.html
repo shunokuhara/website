@@ -16,7 +16,8 @@
     img { max-width: 100%; display: block; }
 
     .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-    .header-inner { max-width: 1000px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .header-inner { max-width: 1000px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; }
+    .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 10px; width: 44px; height: 40px; font-size: 20px; line-height: 1; color: var(--navy); cursor: pointer; align-items: center; justify-content: center; }
     .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.02em; }
     .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
     .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
@@ -25,7 +26,7 @@
     .page-hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
     .page-hero-inner { max-width: 1000px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: center; }
     .ph-photo { border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--border); box-shadow: 0 18px 44px rgba(18,48,79,0.12); }
-    .ph-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 18%; }
+    .ph-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
     .ph-name { font-size: clamp(28px,4vw,40px); color: var(--navy); margin: 0 0 6px; letter-spacing: -0.02em; }
     .ph-en { color: var(--muted); margin: 0 0 14px; }
     .ph-affil { color: var(--text); margin: 0 0 4px; font-weight: 700; }
@@ -62,7 +63,17 @@
     .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 
     @media (max-width: 760px) {
-      .nav { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .nav {
+        display: none;
+        position: absolute; top: calc(100% + 1px); left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--white); border-bottom: 1px solid var(--border);
+        padding: 6px 24px 16px; box-shadow: 0 18px 30px rgba(18,48,79,0.08);
+      }
+      .nav.open { display: flex; }
+      .nav a { padding: 13px 2px; border-bottom: 1px solid var(--border); }
+      .nav .contact-link { margin-top: 12px; border-bottom: none; text-align: center; }
       .page-hero-inner { grid-template-columns: 1fr; }
       .ph-photo { max-width: 200px; }
       .award-list { grid-template-columns: 1fr; }
@@ -84,6 +95,7 @@
         <a href="profile.html" aria-current="page" style="color:var(--blue);font-weight:700;">プロフィール</a>
         <a class="contact-link" href="index.html#contact">問い合わせ</a>
       </nav>
+      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
     </div>
   </header>
 
@@ -185,8 +197,6 @@
         <p class="lead">論文・国際会議発表・研究費等の詳細は researchmap に最新情報をまとめています。</p>
         <div class="cv-links">
           <a class="button primary" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener">researchmap</a>
-          <a class="button" href="achievement.html">業績リスト</a>
-          <a class="button" href="funding.html">研究費・表彰</a>
         </div>
       </section>
     </div>
@@ -198,5 +208,23 @@
       <div><a href="index.html">ホーム</a></div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var t = document.querySelector(".nav-toggle");
+      var nav = document.querySelector(".nav");
+      if (t && nav) {
+        t.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          t.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("open");
+            t.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
