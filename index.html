@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <script>
+  (function () {
+    try {
+      var supported = { en:'en.html', zh:'zh.html', id:'id.html', th:'th.html', vi:'vi.html', my:'my.html' };
+      var saved = localStorage.getItem('preferredLang');
+      if (saved === 'ja') return;
+      if (saved && supported[saved]) { location.replace(supported[saved]); return; }
+      if (saved) return;
+      var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      var code = nav.toLowerCase().split('-')[0];
+      if (code === 'ja') return;
+      if (supported[code]) location.replace(supported[code]);
+    } catch (e) {}
+  })();
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>奥原 俊 研究室 | AI・マルチエージェントによる合意形成と意思決定支援（三重大学）</title>
   <meta name="description" content="三重大学大学院工学研究科 奥原 俊（講師）。AIエージェント、マルチエージェントシステム、大規模言語モデル（LLM）、自動交渉、合意形成支援、AI for Scienceに関する研究。講演・共同研究・取材のご相談を受け付けています。" />
   <meta name="keywords" content="奥原俊, 三重大学, AIエージェント, マルチエージェント, LLM, 自動交渉, 合意形成, 意思決定支援, AI for Science, 講演依頼" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --navy: #12304f;
@@ -148,6 +167,18 @@
       .feature-box { position: static; }
       .records .links { justify-content: flex-start; }
     }
+  
+    .lang { position: relative; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 7px; background: var(--white); color: var(--navy); border: 1px solid var(--border); border-radius: 999px; padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: "Noto Sans Thai","Noto Sans Myanmar", inherit; }
+    .lang-btn:hover { border-color: var(--blue); }
+    .lang-btn .globe { width: 16px; height: 16px; }
+    .lang-btn .chev { width: 10px; height: 10px; transition: transform 0.2s; }
+    .lang[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 190px; background: var(--white); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 18px 44px rgba(18,48,79,0.16); padding: 6px; display: none; list-style: none; margin: 0; z-index: 80; }
+    .lang[aria-expanded="true"] .lang-menu { display: block; }
+    .lang-menu a { display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px; color: var(--text); font-family: "Noto Sans Thai","Noto Sans Myanmar", inherit; }
+    .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
+    .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
   </style>
 </head>
 <body>
@@ -163,7 +194,36 @@
         <a href="#lectures">講演</a>
         <a href="profile.html">プロフィール</a>
         <a class="contact-link" href="#contact">問い合わせ</a>
+        <div class="lang" id="lang" aria-expanded="false">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+          </button>
+          <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
+          </ul>
+        </div>
       </nav>
+      <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+          <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
+        </ul>
+      </div>
+
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><rect y="0" width="18" height="2" rx="1"></rect><rect y="6" width="18" height="2" rx="1"></rect><rect y="12" width="18" height="2" rx="1"></rect></svg>
         <span>Menu</span>
@@ -460,6 +520,23 @@
         });
       }
     })();
+  </script>
+  <script>
+    document.querySelectorAll('.lang').forEach(function (box) {
+      var btn = box.querySelector('.lang-btn'); if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = box.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.lang').forEach(function (b) { b.setAttribute('aria-expanded','false'); var bb=b.querySelector('.lang-btn'); if(bb) bb.setAttribute('aria-expanded','false'); });
+        box.setAttribute('aria-expanded', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+    });
+    document.addEventListener('click', function () { document.querySelectorAll('.lang').forEach(function (b){ b.setAttribute('aria-expanded','false'); var bb=b.querySelector('.lang-btn'); if(bb) bb.setAttribute('aria-expanded','false'); }); });
+    document.addEventListener('keydown', function (e){ if(e.key==='Escape') document.querySelectorAll('.lang').forEach(function(b){ b.setAttribute('aria-expanded','false'); }); });
+    function syncLang(){ var m=document.getElementById('langMobile'); var n=document.querySelector('header .nav'); if(!m||!n) return; m.style.display = (getComputedStyle(n).display==='none') ? 'block' : 'none'; }
+    syncLang(); window.addEventListener('resize', syncLang);
+    document.querySelectorAll('.lang-menu a[data-lang]').forEach(function (a){ a.addEventListener('click', function(){ try{ localStorage.setItem('preferredLang', a.getAttribute('data-lang')); }catch(err){} }); });
   </script>
 </body>
 </html>

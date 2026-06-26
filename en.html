@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Okuhara Laboratory | Human-AI Collaboration, Negotiation & Consensus (Mie University)</title>
+  <meta name="description" content="Okuhara Laboratory, Graduate School of Engineering, Mie University. Automated negotiation, multi-agent systems, LLM-based decision support, and human-AI collaboration. We welcome international master's and PhD students. Government and external scholarships supported." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #12304f;
+      --blue: #1f6fb2;
+      --light-blue: #eef6ff;
+      --gray: #f5f7fa;
+      --text: #1d2733;
+      --muted: #65758b;
+      --border: #d8e0ea;
+      --white: #ffffff;
+      --accent: #d79a2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.75;
+      background: var(--white);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.01em; line-height: 1.2; }
+    .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
+    .nav a { padding: 6px 0; }
+    .nav .contact-link { background: var(--navy); color: var(--white); padding: 8px 14px; border-radius: 999px; }
+
+    /* Language dropdown */
+    .lang { position: relative; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--white); color: var(--navy);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+    }
+    .lang-btn:hover { border-color: var(--blue); }
+    .lang-btn .globe { width: 16px; height: 16px; }
+    .lang-btn .chev { width: 10px; height: 10px; transition: transform 0.2s; }
+    .lang[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; right: 0; top: calc(100% + 8px);
+      min-width: 190px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 14px;
+      box-shadow: 0 18px 44px rgba(18,48,79,0.16);
+      padding: 6px; display: none; list-style: none; margin: 0;
+    }
+    .lang[aria-expanded="true"] .lang-menu { display: block; }
+    .lang-menu a {
+      display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px;
+      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+    }
+    .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
+    .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
+    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.22; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.02em; max-width: 18ch; }
+    .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 22px; max-width: 60ch; }
+    .hero-name { font-size: 16px; color: var(--navy); font-weight: 700; margin: 0; }
+    .hero-affil { font-size: 14px; color: var(--muted); margin: 4px 0 26px; max-width: 56ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border-radius: 999px; font-weight: 700; border: 1px solid transparent; font-size: 15px; cursor: pointer; }
+    .button.primary { background: var(--navy); color: var(--white); }
+    .button.secondary { background: var(--white); color: var(--navy); border-color: var(--border); }
+    .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .tag { font-size: 13px; color: var(--navy); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .gray-section { background: var(--gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    h2 { font-size: clamp(22px, 2.6vw, 30px); color: var(--navy); margin: 0 0 8px; letter-spacing: -0.01em; }
+    .section-intro { color: var(--muted); margin: 0 0 28px; max-width: 64ch; }
+
+    /* Highlighted admissions block */
+    .admit { background: var(--navy); color: #eaf2fb; border-radius: 24px; padding: 36px; }
+    .admit h2 { color: var(--white); }
+    .admit p { color: #cfe0f3; max-width: 62ch; }
+    .admit .button.primary { background: var(--white); color: var(--navy); margin-top: 8px; }
+    .fund-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 22px 0 26px; }
+    .fund-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; padding: 18px; }
+    .fund-card h3 { margin: 0 0 6px; font-size: 16px; color: var(--white); }
+    .fund-card p { margin: 0; font-size: 14px; color: #c3d6ec; }
+    .admit-notes { display: grid; gap: 12px; margin: 18px 0 22px; }
+    .admit-notes p { margin: 0; font-size: 15px; color: #cfe0f3; max-width: 64ch; }
+    .admit-notes strong { color: var(--white); }
+    .tutor-note { font-size: 14px; color: #b9cde6; margin: 4px 0 22px; max-width: 64ch; }
+
+    /* Students we welcome */
+    .welcome-list { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 12px; }
+    .welcome-list li { position: relative; padding-left: 30px; color: #3a4a5e; font-size: 15px; max-width: 70ch; }
+    .welcome-list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); }
+    .welcome-list li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 6px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+
+    /* Research cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card { border: 1px solid var(--border); border-radius: 18px; padding: 22px; background: var(--white); }
+    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--navy); }
+    .card p { margin: 0; font-size: 15px; color: #3a4a5e; }
+    .apply-note { margin-top: 22px; color: var(--muted); font-size: 15px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: start; }
+    .about-photo { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: #e7edf5; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .about p { margin: 0 0 14px; }
+    .collab { font-size: 15px; color: #3a4a5e; }
+
+    /* Contact */
+    .contact-box { border: 1px solid var(--border); border-radius: 20px; padding: 30px; background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px 28px; margin: 18px 0 22px; }
+    .contact-grid dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 3px; }
+    .contact-grid dd { margin: 0; font-size: 15px; }
+
+    /* Links / footer */
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .link-card { border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: block; }
+    .link-card:hover { border-color: var(--blue); }
+    .link-card strong { color: var(--navy); display: block; margin-bottom: 4px; }
+    .link-card span { color: var(--muted); font-size: 14px; }
+    footer { background: var(--navy); color: #cfe0f3; padding: 30px 0; font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .admit { padding: 26px; }
+    }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  
+    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar",inherit; }
+    .mt-bar a { color:var(--blue); font-weight:700; }
+
+    .talk-aud { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+    .past-h3 { font-size: 16px; color: var(--navy); margin: 30px 0 10px; }
+    .past-list { list-style: none; margin: 0; padding: 0; }
+    .past-list li { padding: 12px 0; border-top: 1px solid var(--border); font-size: 15px; color: #3a4a5e; }
+    .past-date { display: inline-block; min-width: 58px; font-weight: 700; color: var(--navy); margin-right: 8px; }
+    .pdf-link { color: var(--blue); font-weight: 700; white-space: nowrap; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .photo-fig { margin: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--white); }
+    .photo-fig img { width: 100%; height: 240px; object-fit: cover; }
+    .photo-fig figcaption { padding: 12px 16px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="en.html">Okuhara Laboratory<span>Mie University, Graduate School of Engineering</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#research">Research</a>
+        <a href="#talks">Talks</a>
+        <a href="#about">Lab & PI</a>
+        <a href="#welcome">Students</a>
+        <a href="#admissions">Admissions</a>
+        <a class="contact-link" href="#contact">Contact</a>
+<div class="lang" id="lang" aria-expanded="false">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+            <span id="langCurrent">English</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+          </button>
+          <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en" aria-current="true">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+          <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+          <span>English</span>
+          <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en" aria-current="true">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Mie University · Graduate School of Engineering</div>
+        <h1>Building AI that helps people reach agreement</h1>
+        <p class="hero-lead">Okuhara Laboratory studies automated negotiation, multi-agent systems, and LLM-based decision support. We design AI that works alongside people and helps groups decide, rather than deciding for them.</p>
+        <p class="hero-name">Shun Okuhara, Ph.D.</p>
+        <p class="hero-affil">Lecturer, Graduate School of Engineering, Mie University · Visiting Researcher, Institute for Advanced Research, Nagoya University</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#admissions">Join the lab</a>
+          <a class="button secondary" href="#research">Research themes</a>
+        </div>
+        <div class="keyword-row">
+          <span class="tag">Automated negotiation</span>
+          <span class="tag">Multi-agent systems</span>
+          <span class="tag">LLM decision support</span>
+          <span class="tag">Consensus building</span>
+          <span class="tag">Human-AI collaboration</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="gray-section">
+      <div class="wrap">
+        <h2>Research themes</h2>
+        <p class="section-intro">Our core is decision support and consensus building. Education, healthcare and elderly support, and research support are the fields where we apply it.</p>
+        <div class="cards">
+          <div class="card"><h3>Automated negotiation</h3><p>Negotiation agents that represent people's interests and search for agreements when issues are many and interdependent.</p></div>
+          <div class="card"><h3>Multi-agent consensus</h3><p>Protocols and systems that help groups reach a decision without letting the loudest voice dominate the room.</p></div>
+          <div class="card"><h3>LLM-based decision support</h3><p>Dialogue agents built on large language models that draw out, organize, and explain what people actually prefer.</p></div>
+          <div class="card"><h3>Explainable, human-centered AI</h3><p>Methods that keep an AI's reasoning understandable, so the person stays in control of the final decision.</p></div>
+        </div>
+        <p class="apply-note">Applications span education, healthcare and elderly support, and AI for Science. If your interest sits next to these, we are glad to talk.</p>
+      </div>
+    </section>
+
+    <section id="talks">
+      <div class="wrap">
+        <h2>Talks and invited lectures</h2>
+        <p class="section-intro">Shun Okuhara accepts invitations for talks, seminars, and lectures, including corporate training, university faculty development, seminars for local governments and regional groups, academic meetings, and outreach classes.</p>
+        <div class="cards">
+          <div class="card"><h3>How AI agents will change society</h3><p>Trends in generative AI, LLMs, and autonomous AI agents, and what they mean for work, research, and education.</p><p class="talk-aud">For companies, universities, and general audiences</p></div>
+          <div class="card"><h3>Consensus building and decision support with AI</h3><p>How negotiation AI, multi-agent systems, and discussion support can help people make decisions.</p><p class="talk-aud">For local governments, companies, and study groups</p></div>
+          <div class="card"><h3>AI for Science and research automation</h3><p>How AI is reshaping research planning, literature review, experiment support, and academic writing.</p><p class="talk-aud">For universities and research institutions</p></div>
+          <div class="card"><h3>Education and AI literacy in the age of generative AI</h3><p>Using generative AI in higher education and data-science education, with its opportunities and challenges.</p><p class="talk-aud">For high schools, universities, and educators</p></div>
+        </div>
+        <h3 class="past-h3">Selected past talks</h3>
+        <ul class="past-list">
+          <li><span class="past-date">2026.3</span> Tohoku University Open Science Seminar. "LLM strategies for the AI for Science era: practical know-how for redesigning the research process." Hosted by the Research Management Center, Tohoku University. <a class="pdf-link" href="pdf/tohoku-ai-for-science-2026.pdf" target="_blank" rel="noopener">Flyer</a></li>
+          <li><span class="past-date">2025.8</span> "Agreement Generation from Negotiation Dialogues Using Utility Values and LLMs." Invited lecture at "Exploring Frontiers in AI," McGill University and Mila, Montreal. <a class="pdf-link" href="pdf/mcgill-mila-seminar-2025.pdf" target="_blank" rel="noopener">Poster</a></li>
+          <li><span class="past-date">2022.11</span> "The next step beyond IoT: multi-agent systems and real-world applications." Industry-academia-regional seminar hosted by Sanjusan Bank, Sanjusan Research Institute, Mie University, and the Yokkaichi Chamber of Commerce. <a class="pdf-link" href="pdf/mie-industry-seminar-2022.pdf" target="_blank" rel="noopener">Flyer</a></li>
+          <li><span class="past-date">2022.4</span> Mie University DS Public Seminar (2nd). "Real-world deployment of multi-agent systems as DX spreads: the state and challenges of distributed AI." Co-hosted by the Information Education Committee and the Information Education Research Organization (university-wide FD). <a class="pdf-link" href="img/ds-seminar-2022.jpg" target="_blank" rel="noopener">Flyer</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="photos" class="gray-section">
+      <div class="wrap">
+        <h2>Activities</h2>
+        <p class="section-intro">Scenes from talks, research presentations, and international collaboration.</p>
+        <div class="photo-grid">
+          <figure class="photo-fig"><img src="img/talk-photo.jpg" alt="Talks and research presentations" /><figcaption>Talks and research presentations</figcaption></figure>
+          <figure class="photo-fig"><img src="img/canada-collab.jpg" alt="International collaboration and seminars with overseas researchers" /><figcaption>International collaboration and seminars with overseas researchers</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="wrap about-grid">
+        <div class="about-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
+        <div>
+          <h2>About the lab</h2>
+          <p>The lab is led by Shun Okuhara, Lecturer at the Graduate School of Engineering, Mie University, and Visiting Researcher at the Institute for Advanced Research, Nagoya University. He received his Ph.D. in Engineering from Nagoya Institute of Technology in 2020 and was a Visiting Professor at Carleton University in Canada.</p>
+          <p class="collab">Frequent collaborators include Takayuki Ito (Kyoto University), Rafik Hadfi, and Mark Klein (MIT). The lab has ongoing international ties with McGill University and Mila in Montreal, and with the National Research Council of Canada.</p>
+          <p class="collab">We value a healthy pace of work and respect each student's own career path. Students still building their AI or programming background are welcome, as long as they are ready to learn and to carry the implementation through themselves. You need to be curious and willing to do the work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="welcome" class="gray-section">
+      <div class="wrap">
+        <h2>Students we welcome</h2>
+        <p class="section-intro">We are glad to hear from students who want to build, test, and publish, whatever field they come from.</p>
+        <ul class="welcome-list">
+          <li>Interested in AI, data science, multi-agent systems, LLMs, and human-AI collaboration</li>
+          <li>Able to learn new methods and papers on their own and drive their own research</li>
+          <li>Motivated to program (e.g., Python) and build systems</li>
+          <li>Keen to present at international conferences and write papers in English</li>
+          <li>Interested in combining AI with other fields such as education, healthcare, elderly support, and regional issues</li>
+          <li>Comfortable working through ideas in discussion with a team</li>
+        </ul>
+        <p class="apply-note">We welcome students from diverse backgrounds, not only engineering but also information science, mathematics, education, psychology, cognitive science, and the social sciences. What matters most is the motivation to learn AI and information science, and the willingness to carry your work through to implementation and evaluation yourself.</p>
+      </div>
+    </section>
+
+    <section id="admissions">
+      <div class="wrap">
+        <div class="admit">
+          <h2>International students are welcome</h2>
+          <p>We supervise international master's and doctoral students and work with several partner universities across Asia. Applicants from outside engineering, including those with a humanities or social-science background, are welcome. Before contacting us, please read the points below.</p>
+          <div class="admit-notes">
+            <p><strong>Language.</strong> Research supervision is conducted mainly in Japanese, and Japanese ability is desirable for day-to-day guidance and university procedures. We routinely work with English papers and academic writing, and English can be used when needed.</p>
+            <p><strong>Check the requirements first.</strong> Applicants are responsible for confirming the admission, language, and academic requirements set by Mie University and by each scholarship program before applying. If these are not met, we may be unable to accept you or to prepare recommendation documents.</p>
+            <p><strong>Acceptance is not guaranteed.</strong> We welcome inquiries, but an inquiry, even a detailed one, does not guarantee acceptance. We assess language ability, academic record, research plan, and our supervision capacity together.</p>
+          </div>
+          <div class="fund-grid">
+            <div class="fund-card"><h3>MEXT scholarship</h3><p>University- and embassy-recommendation routes are available for qualified applicants. University slots are limited and assessed comprehensively (language, grades, research plan, fit). Ask early, since deadlines fall well before enrollment.</p></div>
+            <div class="fund-card"><h3>Government & external scholarships</h3><p>Check the program's eligibility and language requirements before applying. If the required scores or eligibility are not met, we cannot prepare supervision documents.</p></div>
+            <div class="fund-card"><h3>Privately funded & research students</h3><p>Privately funded applicants and pre-enrollment research students (kenkyusei) are considered individually, based on research fit, language ability, academic record, and our capacity. A prior consultation does not guarantee acceptance.</p></div>
+          </div>
+          <p class="tutor-note">New international master's and doctoral students are assigned a Japanese-speaking university tutor for the first months after arrival (about three months), who helps with daily-life setup, Japanese, and getting started with studies in your field. Ongoing support for credits, classes, and research comes mainly from the supervisor and the lab.</p>
+          <a class="button primary" href="#contact">Email the lab</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="gray-section">
+      <div class="wrap">
+        <div class="contact-box">
+          <h2>Contact</h2>
+          <p class="section-intro">For admissions, research, or talk invitations, email the lab directly. To help us reply quickly, please include your background, your research interests, your intended start term, and your funding plan (MEXT, another scholarship, privately funded, or undecided).</p>
+          <dl class="contact-grid">
+            <div><dt>Principal investigator</dt><dd>Shun Okuhara, Ph.D.</dd></div>
+            <div><dt>Email</dt><dd><a id="email-link" href="#contact" style="color:var(--blue);font-weight:700;">okuhara [at] info.mie-u.ac.jp</a></dd></div>
+            <div><dt>Address</dt><dd>Faculty of Engineering Bldg. 6, Mie University, 1577 Kurimamachiya-cho, Tsu, Mie 514-8507, Japan</dd></div>
+          </dl>
+          <a class="button primary" id="email-button" href="#contact">Email the lab</a>
+        </div>
+
+        <h2 style="margin-top:48px;">More information</h2>
+        <p class="section-intro">The pages below carry the full record. The lab and personal sites are written in Japanese; publications on researchmap can be viewed in English.</p>
+        <div class="links">
+          <a class="link-card" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener"><strong>Publications (researchmap)</strong><span>Full list of papers and talks. English display available.</span></a>
+          <a class="link-card" href="https://sites.google.com/view/okuharalab/" target="_blank" rel="noopener"><strong>Lab site (Japanese)</strong><span>Members, lab life, and student information.</span></a>
+          <a class="link-card" href="index.html"><strong>Personal site (Japanese)</strong><span>Talks, activities, and detailed profile.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>Okuhara Laboratory, Graduate School of Engineering, Mie University</div>
+      <div>© 2026 Shun Okuhara</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Language dropdown: click to toggle, click-outside / Esc to close ---
+    document.querySelectorAll('.lang').forEach(function (box) {
+      var btn = box.querySelector('.lang-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = box.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.lang').forEach(function (b) {
+          b.setAttribute('aria-expanded', 'false');
+          var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+        });
+        box.setAttribute('aria-expanded', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+    });
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.lang').forEach(function (b) {
+        b.setAttribute('aria-expanded', 'false');
+        var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') document.querySelectorAll('.lang').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    });
+
+    // Show mobile language button when the inline nav is hidden
+    function syncLangVisibility() {
+      var mobile = document.getElementById('langMobile');
+      if (!mobile) return;
+      mobile.style.display = window.matchMedia('(max-width: 760px)').matches ? 'block' : 'none';
+    }
+    syncLangVisibility();
+    window.addEventListener('resize', syncLangVisibility);
+
+    // Remember the language a visitor picks, so the root page does not redirect them later.
+    document.querySelectorAll('.lang-menu a[data-lang]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem('preferredLang', a.getAttribute('data-lang')); } catch (err) {}
+      });
+    });
+
+    // --- Email: assemble at runtime to cut down on scraping ---
+    (function () {
+      var user = 'okuhara', domain = 'info.mie-u.ac.jp';
+      var addr = user + '@' + domain;
+      var link = document.getElementById('email-link');
+      if (link) { link.href = 'mailto:' + addr; }
+      var btn = document.getElementById('email-button');
+      if (btn) { btn.href = 'mailto:' + addr; }
+    })();
+  </script>
+</body>
+</html>
