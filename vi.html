@@ -7,7 +7,7 @@
   <meta name="description" content="Okuhara Laboratory, Trường Sau đại học Kỹ thuật, Đại học Mie. Đàm phán tự động, hệ đa tác tử, hỗ trợ ra quyết định dựa trên LLM và hợp tác người-AI. Chúng tôi chào đón nghiên cứu sinh thạc sĩ và tiến sĩ quốc tế. Hỗ trợ học bổng chính phủ và bên ngoài." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --navy: #12304f;
@@ -48,7 +48,7 @@
       background: var(--white); color: var(--navy);
       border: 1px solid var(--border); border-radius: 999px;
       padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer;
-      font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+      font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
     }
     .lang-btn:hover { border-color: var(--blue); }
     .lang-btn .globe { width: 16px; height: 16px; }
@@ -64,14 +64,18 @@
     .lang[aria-expanded="true"] .lang-menu { display: block; }
     .lang-menu a {
       display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px;
-      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
     }
     .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
     .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
 
     /* Hero */
     .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
-    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; }
+    .hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 28px; padding: 18px; box-shadow: 0 24px 60px rgba(18,48,79,0.12); }
+    .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: #e7edf5; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .photo-caption { padding: 14px 6px 2px; font-size: 14px; color: var(--muted); margin: 0; }
+    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 0.02em; }
     .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.22; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.02em; max-width: 18ch; }
     .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 22px; max-width: 60ch; }
@@ -122,6 +126,7 @@
     .about-photo { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: #e7edf5; }
     .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
     .about p { margin: 0 0 14px; }
+    .about-text { max-width: 74ch; }
     .collab { font-size: 15px; color: #3a4a5e; }
 
     /* Contact */
@@ -143,11 +148,13 @@
       .nav { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .admit { padding: 26px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+      .hero-card { order: -1; }
     }
     :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   
-    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar",inherit; }
+    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit; }
     .mt-bar a { color:var(--blue); font-weight:700; }
 
     .talk-aud { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
@@ -182,11 +189,19 @@
           <ul class="lang-menu" role="menu" aria-label="Languages">
             <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
             <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
             <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi" aria-current="true">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
           </ul>
         </div>
       </nav>
@@ -199,12 +214,20 @@
         <ul class="lang-menu" role="menu" aria-label="Languages">
             <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
             <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
             <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi" aria-current="true">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာ</a></li>
-        </ul>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+          </ul>
       </div>
     </div>
   </header>
@@ -212,6 +235,7 @@
   <main id="top">
     <section class="hero">
       <div class="hero-inner">
+        <div>
         <div class="eyebrow">Đại học Mie · Trường Sau đại học Kỹ thuật</div>
         <h1>Xây dựng AI giúp con người đạt được đồng thuận</h1>
         <p class="hero-lead">Okuhara Laboratory nghiên cứu đàm phán tự động, hệ đa tác tử và hỗ trợ ra quyết định dựa trên mô hình ngôn ngữ lớn. Chúng tôi thiết kế AI làm việc cùng con người và giúp tập thể ra quyết định, thay vì quyết định thay họ.</p>
@@ -228,16 +252,20 @@
           <span class="tag">Xây dựng đồng thuận</span>
           <span class="tag">Hợp tác người-AI</span>
         </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile photo">
+          <div class="profile-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
+          <p class="photo-caption">Shun Okuhara, Lecturer, Graduate School of Engineering, Mie University</p>
+        </aside>
       </div>
     </section>
 
     <section id="about" class="about">
-      <div class="wrap about-grid">
-        <div class="about-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
-        <div>
+      <div class="wrap">
+        <div class="about-text">
           <h2>Về phòng thí nghiệm</h2>
           <p>Phòng thí nghiệm do Shun Okuhara dẫn dắt, ông là Giảng viên tại Trường Sau đại học Kỹ thuật, Đại học Mie, và Nghiên cứu viên thỉnh giảng tại Institute for Advanced Research, Đại học Nagoya. Ông nhận bằng Tiến sĩ Kỹ thuật tại Nagoya Institute of Technology năm 2020 và từng là Giáo sư thỉnh giảng tại Đại học Carleton, Canada.</p>
-          <p class="collab">Các cộng sự thường xuyên gồm Takayuki Ito (Đại học Kyoto), Rafik Hadfi và Mark Klein (MIT). Phòng thí nghiệm có hợp tác quốc tế liên tục với Đại học McGill và Mila ở Montreal, cùng Hội đồng Nghiên cứu Quốc gia Canada.</p>
+          <p class="collab">Các cộng sự thường xuyên gồm Takayuki Ito (Đại học Kyoto), Rafik Hadfi và Mark Klein (MIT). Phòng thí nghiệm cũng duy trì các kết nối nghiên cứu với Canada. Shun Okuhara từng có bài giảng được mời tại một hội thảo chung với Đại học McGill và Mila ở Montreal. Ngoài ra, phòng thí nghiệm đang phát triển trao đổi nghiên cứu với Hội đồng Nghiên cứu Quốc gia Canada, bao gồm các chuyến nghiên cứu của sinh viên và thời gian lưu trú của Okuhara với tư cách nghiên cứu viên thỉnh giảng.</p>
           <p class="collab">Chúng tôi coi trọng nhịp làm việc lành mạnh và tôn trọng con đường sự nghiệp riêng của từng sinh viên. Những bạn vẫn đang xây nền tảng AI hay lập trình đều được chào đón, miễn là sẵn sàng học hỏi và tự mình hoàn thành phần triển khai. Bạn cần sự tò mò và tinh thần sẵn sàng bắt tay vào việc.</p>
         </div>
       </div>

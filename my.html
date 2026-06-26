@@ -7,7 +7,7 @@
   <meta name="description" content="Mie တက္ကသိုလ် အင်ဂျင်နီယာ ဘွဲ့လွန်ကျောင်း Okuhara Laboratory။ အလိုအလျောက်ညှိနှိုင်းမှု၊ multi-agent စနစ်များ၊ LLM အခြေပြု ဆုံးဖြတ်ချက်ပံ့ပိုးမှုနှင့် လူ-AI ပူးပေါင်းဆောင်ရွက်မှုကို သုတေသနပြုသည်။ နိုင်ငံတကာ မဟာဘွဲ့နှင့် ပါရဂူဘွဲ့ ကျောင်းသားများကို ကြိုဆိုသည်။ အစိုးရနှင့် ပြင်ပ ပညာသင်ဆုများ ပံ့ပိုးသည်။" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --navy: #12304f;
@@ -48,7 +48,7 @@
       background: var(--white); color: var(--navy);
       border: 1px solid var(--border); border-radius: 999px;
       padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer;
-      font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+      font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
     }
     .lang-btn:hover { border-color: var(--blue); }
     .lang-btn .globe { width: 16px; height: 16px; }
@@ -64,14 +64,18 @@
     .lang[aria-expanded="true"] .lang-menu { display: block; }
     .lang-menu a {
       display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px;
-      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", inherit;
+      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
     }
     .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
     .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
 
     /* Hero */
     .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
-    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; }
+    .hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 28px; padding: 18px; box-shadow: 0 24px 60px rgba(18,48,79,0.12); }
+    .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: #e7edf5; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .photo-caption { padding: 14px 6px 2px; font-size: 14px; color: var(--muted); margin: 0; }
+    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 0.02em; }
     .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.22; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.02em; max-width: 18ch; }
     .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 22px; max-width: 60ch; }
@@ -122,6 +126,7 @@
     .about-photo { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: #e7edf5; }
     .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
     .about p { margin: 0 0 14px; }
+    .about-text { max-width: 74ch; }
     .collab { font-size: 15px; color: #3a4a5e; }
 
     /* Contact */
@@ -143,11 +148,13 @@
       .nav { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .admit { padding: 26px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+      .hero-card { order: -1; }
     }
     :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   
-    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar",inherit; }
+    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit; }
     .mt-bar a { color:var(--blue); font-weight:700; }
 
     .talk-aud { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
@@ -176,35 +183,51 @@
 <div class="lang" id="lang" aria-expanded="false">
           <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
             <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
-            <span id="langCurrent">မြန်မာ</span>
+            <span id="langCurrent">မြန်မာဘာသာ</span>
             <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
           </button>
           <ul class="lang-menu" role="menu" aria-label="Languages">
             <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
             <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
             <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my" aria-current="true">မြန်မာ</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my" aria-current="true">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
           </ul>
         </div>
       </nav>
       <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
         <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
           <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
-          <span>မြန်မာ</span>
+          <span>မြန်မာဘာသာ</span>
           <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
         </button>
         <ul class="lang-menu" role="menu" aria-label="Languages">
             <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
             <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">中文</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
             <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my" aria-current="true">မြန်မာ</a></li>
-        </ul>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my" aria-current="true">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+          </ul>
       </div>
     </div>
   </header>
@@ -212,6 +235,7 @@
   <main id="top">
     <section class="hero">
       <div class="hero-inner">
+        <div>
         <div class="eyebrow">Mie တက္ကသိုလ် · အင်ဂျင်နီယာ ဘွဲ့လွန်ကျောင်း</div>
         <h1>လူတွေ သဘောတူညီချက် ရရှိအောင် ကူညီပေးသော AI ကို တည်ဆောက်ခြင်း</h1>
         <p class="hero-lead">Okuhara Laboratory သည် အလိုအလျောက်ညှိနှိုင်းမှု၊ multi-agent စနစ်များနှင့် LLM အခြေပြု ဆုံးဖြတ်ချက်ပံ့ပိုးမှုကို သုတေသနပြုသည်။ ကျွန်ုပ်တို့သည် လူများကိုယ်စား ဆုံးဖြတ်ပေးခြင်းထက် လူများနှင့်အတူ လုပ်ဆောင်ကာ အဖွဲ့လိုက် ဆုံးဖြတ်ရာတွင် ကူညီသော AI ကို ဒီဇိုင်းဆွဲသည်။</p>
@@ -228,16 +252,20 @@
           <span class="tag">သဘောတူညီချက် တည်ဆောက်ခြင်း</span>
           <span class="tag">လူ-AI ပူးပေါင်းဆောင်ရွက်မှု</span>
         </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile photo">
+          <div class="profile-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
+          <p class="photo-caption">Shun Okuhara, Lecturer, Graduate School of Engineering, Mie University</p>
+        </aside>
       </div>
     </section>
 
     <section id="about" class="about">
-      <div class="wrap about-grid">
-        <div class="about-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
-        <div>
+      <div class="wrap">
+        <div class="about-text">
           <h2>ဓာတ်ခွဲခန်းအကြောင်း</h2>
           <p>ဤဓာတ်ခွဲခန်းကို Mie တက္ကသိုလ် အင်ဂျင်နီယာ ဘွဲ့လွန်ကျောင်း ကထိကနှင့် Nagoya တက္ကသိုလ် Institute for Advanced Research ဧည့်သုတေသီ Shun Okuhara က ဦးဆောင်သည်။ ၎င်းသည် ၂၀၂၀ ခုနှစ်တွင် Nagoya Institute of Technology မှ အင်ဂျင်နီယာ ပါရဂူဘွဲ့ ရရှိခဲ့ပြီး ကနေဒါနိုင်ငံ Carleton တက္ကသိုလ်တွင် ဧည့်ပါမောက္ခအဖြစ် ဆောင်ရွက်ခဲ့သည်။</p>
-          <p class="collab">မကြာခဏ ပူးပေါင်းဆောင်ရွက်သူများတွင် Takayuki Ito (Kyoto တက္ကသိုလ်)၊ Rafik Hadfi နှင့် Mark Klein (MIT) တို့ ပါဝင်သည်။ ဓာတ်ခွဲခန်းသည် Montreal ရှိ McGill တက္ကသိုလ်နှင့် Mila၊ ကနေဒါ National Research Council တို့နှင့် စဉ်ဆက်မပြတ် နိုင်ငံတကာ ပူးပေါင်းဆောင်ရွက်မှု ရှိသည်။</p>
+          <p class="collab">ပုံမှန် ပူးပေါင်းဆောင်ရွက်သူများတွင် Takayuki Ito (ကျိုတိုတက္ကသိုလ်)၊ Rafik Hadfi နှင့် Mark Klein (MIT) ပါဝင်သည်။ ဓာတ်ခွဲခန်းသည် ကနေဒါနှင့်လည်း သုတေသန ဆက်နွှယ်မှု ထိန်းသိမ်းထားသည်။ Shun Okuhara သည် မွန်ထရီအော်လ်ရှိ McGill University နှင့် Mila ပူးတွဲကျင်းပသော ဆွေးနွေးပွဲတွင် ဖိတ်ကြားခံ ဟောပြောချက် ပြုလုပ်ခဲ့သည်။ ထို့အပြင် ဓာတ်ခွဲခန်းသည် National Research Council of Canada နှင့် သုတေသန ဖလှယ်မှုကို တိုးချဲ့နေပြီး၊ ကျောင်းသားများ၏ သုတေသန လည်ပတ်မှုနှင့် Okuhara ၏ ဧည့်သည် သုတေသနပညာရှင်အဖြစ် နေထိုင်မှုတို့ ပါဝင်သည်။</p>
           <p class="collab">ကျွန်ုပ်တို့သည် ကျန်းမာသော အလုပ်လုပ်ပုံကို တန်ဖိုးထားပြီး ကျောင်းသားတစ်ဦးချင်း၏ အသက်မွေးလမ်းကြောင်းကို လေးစားသည်။ AI သို့မဟုတ် programming အခြေခံကို တည်ဆောက်ဆဲ ကျောင်းသားများကိုလည်း သင်ယူရန်နှင့် အကောင်အထည်ဖော်မှုကို ကိုယ်တိုင် ပြီးအောင် လုပ်ရန် အသင့်ရှိသရွေ့ ကြိုဆိုသည်။ စူးစမ်းလိုစိတ်နှင့် လက်တွေ့ လုပ်ဆောင်လိုစိတ် ရှိရန် လိုသည်။</p>
         </div>
       </div>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ओकुहारा प्रयोगशाला | मानव-एआई सहकार्य, वार्ता र सहमति (मिए विश्वविद्यालय)</title>
+  <meta name="description" content="ओकुहारा प्रयोगशाला, मिए विश्वविद्यालयको इन्जिनियरिङ स्नातकोत्तर विद्यालय। स्वचालित वार्ता, बहु-एजेन्ट प्रणाली, एलएलएम-आधारित निर्णय समर्थन र मानव-एआई सहकार्य। हामी विदेशी स्नातकोत्तर र विद्यावारिधि विद्यार्थीलाई स्वागत गर्छौं। सरकारी र बाह्य छात्रवृत्ति समर्थित।" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #12304f;
+      --blue: #1f6fb2;
+      --light-blue: #eef6ff;
+      --gray: #f5f7fa;
+      --text: #1d2733;
+      --muted: #65758b;
+      --border: #d8e0ea;
+      --white: #ffffff;
+      --accent: #d79a2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.75;
+      background: var(--white);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.01em; line-height: 1.2; }
+    .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
+    .nav a { padding: 6px 0; }
+    .nav .contact-link { background: var(--navy); color: var(--white); padding: 8px 14px; border-radius: 999px; }
+
+    /* Language dropdown */
+    .lang { position: relative; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--white); color: var(--navy);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
+    }
+    .lang-btn:hover { border-color: var(--blue); }
+    .lang-btn .globe { width: 16px; height: 16px; }
+    .lang-btn .chev { width: 10px; height: 10px; transition: transform 0.2s; }
+    .lang[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; right: 0; top: calc(100% + 8px);
+      min-width: 190px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 14px;
+      box-shadow: 0 18px 44px rgba(18,48,79,0.16);
+      padding: 6px; display: none; list-style: none; margin: 0;
+    }
+    .lang[aria-expanded="true"] .lang-menu { display: block; }
+    .lang-menu a {
+      display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px;
+      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
+    }
+    .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
+    .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
+    .hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 28px; padding: 18px; box-shadow: 0 24px 60px rgba(18,48,79,0.12); }
+    .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: #e7edf5; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .photo-caption { padding: 14px 6px 2px; font-size: 14px; color: var(--muted); margin: 0; }
+    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.22; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.02em; max-width: 18ch; }
+    .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 22px; max-width: 60ch; }
+    .hero-name { font-size: 16px; color: var(--navy); font-weight: 700; margin: 0; }
+    .hero-affil { font-size: 14px; color: var(--muted); margin: 4px 0 26px; max-width: 56ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border-radius: 999px; font-weight: 700; border: 1px solid transparent; font-size: 15px; cursor: pointer; }
+    .button.primary { background: var(--navy); color: var(--white); }
+    .button.secondary { background: var(--white); color: var(--navy); border-color: var(--border); }
+    .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .tag { font-size: 13px; color: var(--navy); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .gray-section { background: var(--gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    h2 { font-size: clamp(22px, 2.6vw, 30px); color: var(--navy); margin: 0 0 8px; letter-spacing: -0.01em; }
+    .section-intro { color: var(--muted); margin: 0 0 28px; max-width: 64ch; }
+
+    /* Highlighted admissions block */
+    .admit { background: var(--navy); color: #eaf2fb; border-radius: 24px; padding: 36px; }
+    .admit h2 { color: var(--white); }
+    .admit p { color: #cfe0f3; max-width: 62ch; }
+    .admit .button.primary { background: var(--white); color: var(--navy); margin-top: 8px; }
+    .fund-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 22px 0 26px; }
+    .fund-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; padding: 18px; }
+    .fund-card h3 { margin: 0 0 6px; font-size: 16px; color: var(--white); }
+    .fund-card p { margin: 0; font-size: 14px; color: #c3d6ec; }
+    .admit-notes { display: grid; gap: 12px; margin: 18px 0 22px; }
+    .admit-notes p { margin: 0; font-size: 15px; color: #cfe0f3; max-width: 64ch; }
+    .admit-notes strong { color: var(--white); }
+    .tutor-note { font-size: 14px; color: #b9cde6; margin: 4px 0 22px; max-width: 64ch; }
+
+    /* Students we welcome */
+    .welcome-list { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 12px; }
+    .welcome-list li { position: relative; padding-left: 30px; color: #3a4a5e; font-size: 15px; max-width: 70ch; }
+    .welcome-list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); }
+    .welcome-list li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 6px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+
+    /* Research cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card { border: 1px solid var(--border); border-radius: 18px; padding: 22px; background: var(--white); }
+    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--navy); }
+    .card p { margin: 0; font-size: 15px; color: #3a4a5e; }
+    .apply-note { margin-top: 22px; color: var(--muted); font-size: 15px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: start; }
+    .about-photo { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: #e7edf5; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .about p { margin: 0 0 14px; }
+    .about-text { max-width: 74ch; }
+    .collab { font-size: 15px; color: #3a4a5e; }
+
+    /* Contact */
+    .contact-box { border: 1px solid var(--border); border-radius: 20px; padding: 30px; background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px 28px; margin: 18px 0 22px; }
+    .contact-grid dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 3px; }
+    .contact-grid dd { margin: 0; font-size: 15px; }
+
+    /* Links / footer */
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .link-card { border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: block; }
+    .link-card:hover { border-color: var(--blue); }
+    .link-card strong { color: var(--navy); display: block; margin-bottom: 4px; }
+    .link-card span { color: var(--muted); font-size: 14px; }
+    footer { background: var(--navy); color: #cfe0f3; padding: 30px 0; font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .admit { padding: 26px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+      .hero-card { order: -1; }
+    }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  
+    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit; }
+    .mt-bar a { color:var(--blue); font-weight:700; }
+
+    .talk-aud { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+    .past-h3 { font-size: 16px; color: var(--navy); margin: 30px 0 10px; }
+    .past-list { list-style: none; margin: 0; padding: 0; }
+    .past-list li { padding: 12px 0; border-top: 1px solid var(--border); font-size: 15px; color: #3a4a5e; }
+    .past-date { display: inline-block; min-width: 58px; font-weight: 700; color: var(--navy); margin-right: 8px; }
+    .pdf-link { color: var(--blue); font-weight: 700; white-space: nowrap; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .photo-fig { margin: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--white); }
+    .photo-fig img { width: 100%; height: 240px; object-fit: cover; }
+    .photo-fig figcaption { padding: 12px 16px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="ne.html">Okuhara Laboratory<span>मिए विश्वविद्यालय, इन्जिनियरिङ स्नातकोत्तर विद्यालय</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">प्रयोगशाला</a>
+        <a href="#research">अनुसन्धान</a>
+        <a href="#talks">व्याख्यान</a>
+        <a href="#welcome">विद्यार्थी</a>
+        <a href="#admissions">भर्ना</a>
+        <a class="contact-link" href="#contact">सम्पर्क</a>
+<div class="lang" id="lang" aria-expanded="false">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+            <span id="langCurrent">नेपाली</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+          </button>
+          <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne" aria-current="true">नेपाली</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+          <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+          <span>नेपाली</span>
+          <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne" aria-current="true">नेपाली</a></li>
+          </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+        <div class="eyebrow">मिए विश्वविद्यालय · इन्जिनियरिङ स्नातकोत्तर विद्यालय</div>
+        <h1>मानिसहरूलाई सहमतिमा पुग्न मद्दत गर्ने एआई निर्माण गर्दै</h1>
+        <p class="hero-lead">ओकुहारा प्रयोगशालाले स्वचालित वार्ता, बहु-एजेन्ट प्रणाली र एलएलएम-आधारित निर्णय समर्थनको अध्ययन गर्छ। हामी मानिसहरूका लागि निर्णय गर्नुको सट्टा, उनीहरूसँगै काम गरी समूहहरूलाई आफैं निर्णय गर्न मद्दत गर्ने एआई डिजाइन गर्छौं।</p>
+        <p class="hero-name">शुन ओकुहारा, Ph.D.</p>
+        <p class="hero-affil">व्याख्याता, इन्जिनियरिङ स्नातकोत्तर विद्यालय, मिए विश्वविद्यालय · अतिथि अनुसन्धाता, उन्नत अनुसन्धान संस्थान, नागोया विश्वविद्यालय</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#admissions">प्रयोगशालामा सामेल हुनुहोस्</a>
+          <a class="button secondary" href="#research">अनुसन्धान विषय</a>
+        </div>
+        <div class="keyword-row">
+          <span class="tag">स्वचालित वार्ता</span>
+          <span class="tag">बहु-एजेन्ट प्रणाली</span>
+          <span class="tag">एलएलएम निर्णय समर्थन</span>
+          <span class="tag">सहमति निर्माण</span>
+          <span class="tag">मानव-एआई सहकार्य</span>
+        </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile photo">
+          <div class="profile-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
+          <p class="photo-caption">Shun Okuhara, Lecturer, Graduate School of Engineering, Mie University</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="wrap">
+        <div class="about-text">
+          <h2>प्रयोगशालाको बारेमा</h2>
+          <p>प्रयोगशालाको नेतृत्व मिए विश्वविद्यालयको इन्जिनियरिङ स्नातकोत्तर विद्यालयका व्याख्याता तथा नागोया विश्वविद्यालयको उन्नत अनुसन्धान संस्थानका अतिथि अनुसन्धाता शुन ओकुहाराले गर्नुहुन्छ। उहाँले २०२० मा नागोया इन्स्टिच्युट अफ टेक्नोलोजीबाट इन्जिनियरिङमा Ph.D. प्राप्त गर्नुभयो र क्यानडाको कार्लटन विश्वविद्यालयमा अतिथि प्राध्यापक हुनुहुन्थ्यो।</p>
+          <p class="collab">नियमित सहकर्मीहरूमा ताकायुकी इतो (क्योटो विश्वविद्यालय), Rafik Hadfi र Mark Klein (MIT) पर्छन्। प्रयोगशालाले क्यानडासँग पनि अनुसन्धान सम्बन्ध कायम राख्छ। शुन ओकुहाराले मन्ट्रियलमा McGill विश्वविद्यालय र Mila संयुक्त रूपमा आयोजना गरेको सेमिनारमा आमन्त्रित व्याख्यान दिनुभएको छ। यसका अतिरिक्त, प्रयोगशालाले क्यानडाको राष्ट्रिय अनुसन्धान परिषद्‌सँग विद्यार्थी अनुसन्धान भ्रमण र ओकुहाराको अतिथि अनुसन्धाताको रूपमा बसाइ समेत समावेश गर्ने अनुसन्धान आदानप्रदान विकास गरिरहेको छ।</p>
+          <p class="collab">हामी कामको स्वस्थ गतिलाई महत्त्व दिन्छौं र प्रत्येक विद्यार्थीको आफ्नै करियर मार्गलाई सम्मान गर्छौं। एआई वा प्रोग्रामिङको आधार अझै निर्माण गरिरहेका विद्यार्थीहरू पनि स्वागत छन्, जबसम्म उनीहरू सिक्न र कार्यान्वयनलाई आफैं पूरा गर्न तयार छन्। जिज्ञासा र काम गर्ने इच्छा आवश्यक छ।</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="gray-section">
+      <div class="wrap">
+        <h2>अनुसन्धान विषय</h2>
+        <p class="section-intro">हाम्रो मूल विषय निर्णय समर्थन र सहमति निर्माण हो। हामी यसलाई शिक्षा, स्वास्थ्य र वृद्धवृद्धा सहायता, तथा अनुसन्धान समर्थनमा लागू गर्छौं।</p>
+        <div class="cards">
+          <div class="card"><h3>स्वचालित वार्ता</h3><p>समस्याहरू धेरै र अन्तरसम्बन्धित हुँदा मानिसहरूको हितको प्रतिनिधित्व गर्दै सम्झौता खोज्ने वार्ता एजेन्टहरू।</p></div>
+          <div class="card"><h3>बहु-एजेन्ट सहमति</h3><p>सबैभन्दा ठूलो स्वरले हावी हुन नदिई समूहहरूलाई निर्णयमा पुग्न मद्दत गर्ने प्रोटोकल र प्रणालीहरू।</p></div>
+          <div class="card"><h3>एलएलएम-आधारित निर्णय समर्थन</h3><p>मानिसहरूले वास्तवमा के रुचाउँछन् भन्ने कुरा खोतल्ने, व्यवस्थित गर्ने र व्याख्या गर्ने, ठूला भाषा मोडेलमा आधारित संवाद एजेन्टहरू।</p></div>
+          <div class="card"><h3>व्याख्यायोग्य, मानव-केन्द्रित एआई</h3><p>एआईको तर्कलाई बुझ्न सकिने बनाउने विधिहरू, ताकि अन्तिम निर्णयमा व्यक्ति नै नियन्त्रणमा रहोस्।</p></div>
+        </div>
+        <p class="apply-note">अनुप्रयोगहरू शिक्षा, स्वास्थ्य र वृद्धवृद्धा सहायता, तथा AI for Science सम्म फैलिएका छन्। तपाईंको चासो यीसँग नजिक छ भने, कुराकानी गर्न हामी खुसी हुनेछौं।</p>
+      </div>
+    </section>
+
+    <section id="talks">
+      <div class="wrap">
+        <h2>व्याख्यान र आमन्त्रित प्रवचन</h2>
+        <p class="section-intro">शुन ओकुहाराले कर्पोरेट तालिम, विश्वविद्यालय शिक्षक विकास, स्थानीय सरकार र क्षेत्रीय समूहका लागि सेमिनार, प्राज्ञिक भेला र जनचेतना कक्षा लगायतका व्याख्यान, सेमिनार र प्रवचनका आमन्त्रण स्वीकार गर्नुहुन्छ।</p>
+        <div class="cards">
+          <div class="card"><h3>एआई एजेन्टले समाजलाई कसरी बदल्नेछ</h3><p>जेनेरेटिभ एआई, एलएलएम र स्वायत्त एआई एजेन्टका प्रवृत्तिहरू, र तिनको काम, अनुसन्धान र शिक्षाका लागि अर्थ।</p><p class="talk-aud">कम्पनी, विश्वविद्यालय र सर्वसाधारणका लागि</p></div>
+          <div class="card"><h3>एआईद्वारा सहमति निर्माण र निर्णय समर्थन</h3><p>वार्ता एआई, बहु-एजेन्ट प्रणाली र छलफल समर्थनले मानिसहरूलाई निर्णय गर्न कसरी मद्दत गर्न सक्छ।</p><p class="talk-aud">स्थानीय सरकार, कम्पनी र अध्ययन समूहका लागि</p></div>
+          <div class="card"><h3>AI for Science र अनुसन्धान स्वचालन</h3><p>एआईले अनुसन्धान योजना, साहित्य समीक्षा, प्रयोग समर्थन र प्राज्ञिक लेखनलाई कसरी पुनराकार दिँदैछ।</p><p class="talk-aud">विश्वविद्यालय र अनुसन्धान संस्थाका लागि</p></div>
+          <div class="card"><h3>जेनेरेटिभ एआईको युगमा शिक्षा र एआई साक्षरता</h3><p>उच्च शिक्षा र डेटा-विज्ञान शिक्षामा जेनेरेटिभ एआईको प्रयोग, यसका अवसर र चुनौतीसहित।</p><p class="talk-aud">माध्यमिक विद्यालय, विश्वविद्यालय र शिक्षकका लागि</p></div>
+        </div>
+        <h3 class="past-h3">छानिएका विगतका व्याख्यानहरू</h3>
+        <ul class="past-list">
+          <li><span class="past-date">2026.3</span> तोहोकु विश्वविद्यालय खुला विज्ञान सेमिनार। «LLM strategies for the AI for Science era: practical know-how for redesigning the research process.» आयोजक: तोहोकु विश्वविद्यालयको अनुसन्धान व्यवस्थापन केन्द्र। <a class="pdf-link" href="pdf/tohoku-ai-for-science-2026.pdf" target="_blank" rel="noopener">पर्चा</a></li>
+          <li><span class="past-date">2025.8</span> «Agreement Generation from Negotiation Dialogues Using Utility Values and LLMs.» «Exploring Frontiers in AI» मा आमन्त्रित व्याख्यान, McGill विश्वविद्यालय र Mila, मन्ट्रियल। <a class="pdf-link" href="pdf/mcgill-mila-seminar-2025.pdf" target="_blank" rel="noopener">पोस्टर</a></li>
+          <li><span class="past-date">2022.11</span> «The next step beyond IoT: multi-agent systems and real-world applications.» उद्योग-प्राज्ञिक-क्षेत्रीय सेमिनार, आयोजक: Sanjusan बैंक, Sanjusan अनुसन्धान संस्थान, मिए विश्वविद्यालय र योक्काइची वाणिज्य संघ। <a class="pdf-link" href="pdf/mie-industry-seminar-2022.pdf" target="_blank" rel="noopener">पर्चा</a></li>
+          <li><span class="past-date">2022.4</span> मिए विश्वविद्यालय डीएस सार्वजनिक सेमिनार (दोस्रो)। «Real-world deployment of multi-agent systems as DX spreads: the state and challenges of distributed AI.» सह-आयोजक: सूचना शिक्षा समिति र सूचना शिक्षा अनुसन्धान संस्था (विश्वविद्यालयव्यापी FD)। <a class="pdf-link" href="img/ds-seminar-2022.jpg" target="_blank" rel="noopener">पर्चा</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="photos" class="gray-section">
+      <div class="wrap">
+        <h2>गतिविधि</h2>
+        <p class="section-intro">व्याख्यान, अनुसन्धान प्रस्तुति र अन्तर्राष्ट्रिय सहकार्यका दृश्यहरू।</p>
+        <div class="photo-grid">
+          <figure class="photo-fig"><img src="img/talk-photo.jpg" alt="व्याख्यान र अनुसन्धान प्रस्तुति" /><figcaption>व्याख्यान र अनुसन्धान प्रस्तुति</figcaption></figure>
+          <figure class="photo-fig"><img src="img/canada-collab.jpg" alt="विदेशी अनुसन्धाताहरूसँग अन्तर्राष्ट्रिय सहकार्य र सेमिनार" /><figcaption>विदेशी अनुसन्धाताहरूसँग अन्तर्राष्ट्रिय सहकार्य र सेमिनार</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="welcome">
+      <div class="wrap">
+        <h2>हामीले स्वागत गर्ने विद्यार्थी</h2>
+        <p class="section-intro">कुनै पनि क्षेत्रबाट आएका भए पनि, निर्माण गर्न, परीक्षण गर्न र प्रकाशन गर्न चाहने विद्यार्थीहरूबाट सुन्न पाउँदा हामी खुसी हुन्छौं।</p>
+        <ul class="welcome-list">
+          <li>एआई, डेटा विज्ञान, बहु-एजेन्ट प्रणाली, एलएलएम र मानव-एआई सहकार्यमा रुचि भएका</li>
+          <li>नयाँ विधि र लेखहरू आफैं सिक्न सक्ने र आफ्नो अनुसन्धान अगाडि बढाउन सक्ने</li>
+          <li>प्रोग्रामिङ (जस्तै Python) गर्न र प्रणाली निर्माण गर्न उत्प्रेरित</li>
+          <li>अन्तर्राष्ट्रिय सम्मेलनमा प्रस्तुत गर्न र अङ्ग्रेजीमा लेख लेख्न इच्छुक</li>
+          <li>एआईलाई शिक्षा, स्वास्थ्य, वृद्धवृद्धा सहायता र क्षेत्रीय समस्या जस्ता अन्य क्षेत्रसँग जोड्न रुचि भएका</li>
+          <li>टोलीसँग छलफल गर्दै विचार विकास गर्न सहज महसुस गर्ने</li>
+        </ul>
+        <p class="apply-note">हामी इन्जिनियरिङ मात्र होइन, सूचना विज्ञान, गणित, शिक्षा, मनोविज्ञान, संज्ञानात्मक विज्ञान र सामाजिक विज्ञान लगायत विविध पृष्ठभूमिका विद्यार्थीलाई स्वागत गर्छौं। सबैभन्दा महत्त्वपूर्ण कुरा एआई र सूचना विज्ञान सिक्ने प्रेरणा, र आफ्नो कामलाई कार्यान्वयन र मूल्याङ्कनसम्म आफैं पुर्‍याउने इच्छा हो।</p>
+      </div>
+    </section>
+
+    <section id="admissions">
+      <div class="wrap">
+        <div class="admit">
+          <h2>विदेशी विद्यार्थीलाई स्वागत छ</h2>
+          <p>हामी विदेशी स्नातकोत्तर र विद्यावारिधि विद्यार्थीलाई निर्देशन गर्छौं र एसियाभरका धेरै साझेदार विश्वविद्यालयसँग काम गर्छौं। इन्जिनियरिङबाहेक, मानविकी वा सामाजिक विज्ञान पृष्ठभूमिका आवेदकलाई पनि स्वागत छ। हामीलाई सम्पर्क गर्नुअघि कृपया तलका बुँदाहरू पढ्नुहोस्।</p>
+          <div class="admit-notes">
+            <p><strong>भाषा।</strong> अनुसन्धान निर्देशन मुख्यतया जापानी भाषामा हुन्छ, र दैनिक निर्देशन तथा विश्वविद्यालयका प्रक्रियाका लागि जापानी भाषाको क्षमता वाञ्छनीय छ। हामी अङ्ग्रेजी लेख र प्राज्ञिक लेखनसँग नियमित रूपमा काम गर्छौं, र आवश्यक परेमा अङ्ग्रेजी प्रयोग गर्न सकिन्छ।</p>
+            <p><strong>पहिले आवश्यकताहरू जाँच्नुहोस्।</strong> आवेदकले आवेदन गर्नुअघि मिए विश्वविद्यालय र प्रत्येक छात्रवृत्ति कार्यक्रमले तोकेका भर्ना, भाषा र शैक्षिक आवश्यकताहरू आफैं पुष्टि गर्ने जिम्मेवारी हुन्छ। यी पूरा नभएमा, हामी तपाईंलाई स्वीकार गर्न वा सिफारिस कागजात तयार पार्न नसक्ने हुन सक्छौं।</p>
+            <p><strong>स्वीकृति ग्यारेन्टी गरिँदैन।</strong> हामी सोधपुछलाई स्वागत गर्छौं, तर विस्तृत सोधपुछले समेत स्वीकृतिको ग्यारेन्टी गर्दैन। हामी भाषा क्षमता, शैक्षिक अभिलेख, अनुसन्धान योजना र हाम्रो निर्देशन क्षमतालाई सँगै मूल्याङ्कन गर्छौं।</p>
+          </div>
+          <div class="fund-grid">
+            <div class="fund-card"><h3>MEXT छात्रवृत्ति</h3><p>योग्य आवेदकका लागि विश्वविद्यालय-सिफारिस र दूतावास-सिफारिसका बाटो उपलब्ध छन्। विश्वविद्यालय सिफारिसका सिट सीमित हुन्छन् र समग्र रूपमा मूल्याङ्कन गरिन्छ (भाषा, अंक, अनुसन्धान योजना, उपयुक्तता)। म्याद भर्नाभन्दा निकै अगाडि पर्ने हुनाले चाँडै सोध्नुहोस्।</p></div>
+            <div class="fund-card"><h3>सरकारी र बाह्य छात्रवृत्ति</h3><p>आवेदन गर्नुअघि कार्यक्रमको योग्यता र भाषा आवश्यकता जाँच्नुहोस्। आवश्यक अंक वा योग्यता पूरा नभएमा हामी निर्देशन कागजात तयार पार्न सक्दैनौं।</p></div>
+            <div class="fund-card"><h3>निजी खर्च र अनुसन्धान विद्यार्थी</h3><p>निजी खर्चका आवेदक र भर्नापूर्वका अनुसन्धान विद्यार्थी (kenkyusei) लाई अनुसन्धान उपयुक्तता, भाषा क्षमता, शैक्षिक अभिलेख र हाम्रो क्षमताका आधारमा छुट्टाछुट्टै विचार गरिन्छ। पूर्व परामर्शले स्वीकृतिको ग्यारेन्टी गर्दैन।</p></div>
+          </div>
+          <p class="tutor-note">नयाँ विदेशी स्नातकोत्तर र विद्यावारिधि विद्यार्थीलाई आगमनपछिका पहिलो महिनाहरू (करिब तीन महिना) का लागि जापानी बोल्ने विश्वविद्यालय ट्युटर तोकिन्छ, जसले दैनिक जीवन व्यवस्थापन, जापानी भाषा र तपाईंको विषयमा अध्ययन सुरु गर्न मद्दत गर्छ। क्रेडिट, कक्षा र अनुसन्धानको निरन्तर सहयोग मुख्यतया निर्देशक र प्रयोगशालाबाट आउँछ।</p>
+          <a class="button primary" href="#contact">प्रयोगशालालाई इमेल</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="gray-section">
+      <div class="wrap">
+        <div class="contact-box">
+          <h2>सम्पर्क</h2>
+          <p class="section-intro">भर्ना, अनुसन्धान वा व्याख्यान आमन्त्रणका लागि प्रयोगशालालाई सिधै इमेल गर्नुहोस्। हामीलाई छिटो जवाफ दिन सजिलो होस् भन्नाका लागि कृपया आफ्नो पृष्ठभूमि र अनुभव, अनुसन्धान चासो, सुरु गर्न चाहेको सत्र, र वित्तीय योजना (MEXT, अन्य छात्रवृत्ति, निजी खर्च, वा अनिर्णीत) समावेश गर्नुहोस्।</p>
+          <dl class="contact-grid">
+            <div><dt>प्रमुख अनुसन्धाता</dt><dd>शुन ओकुहारा, Ph.D.</dd></div>
+            <div><dt>इमेल</dt><dd><a id="email-link" href="#contact" style="color:var(--blue);font-weight:700;">okuhara [at] info.mie-u.ac.jp</a></dd></div>
+            <div><dt>ठेगाना</dt><dd>Faculty of Engineering Bldg. 6, Mie University, 1577 Kurimamachiya-cho, Tsu, Mie 514-8507, Japan</dd></div>
+          </dl>
+          <a class="button primary" id="email-button" href="#contact">प्रयोगशालालाई इमेल</a>
+        </div>
+
+        <h2 style="margin-top:48px;">थप जानकारी</h2>
+        <p class="section-intro">तलका पृष्ठहरूमा पूर्ण विवरण छ। प्रयोगशाला र व्यक्तिगत साइट जापानी भाषामा छन्; researchmap का प्रकाशनहरू अङ्ग्रेजीमा हेर्न सकिन्छ।</p>
+        <div class="links">
+          <a class="link-card" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener"><strong>प्रकाशन (researchmap)</strong><span>लेख र व्याख्यानको पूर्ण सूची। अङ्ग्रेजीमा हेर्न मिल्ने।</span></a>
+          <a class="link-card" href="https://sites.google.com/view/okuharalab/" target="_blank" rel="noopener"><strong>प्रयोगशाला साइट (जापानी)</strong><span>सदस्य, प्रयोगशाला जीवन र विद्यार्थी जानकारी।</span></a>
+          <a class="link-card" href="index.html"><strong>व्यक्तिगत साइट (जापानी)</strong><span>व्याख्यान, गतिविधि र विस्तृत प्रोफाइल।</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>ओकुहारा प्रयोगशाला, इन्जिनियरिङ स्नातकोत्तर विद्यालय, मिए विश्वविद्यालय</div>
+      <div>© 2026 Shun Okuhara</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Language dropdown: click to toggle, click-outside / Esc to close ---
+    document.querySelectorAll('.lang').forEach(function (box) {
+      var btn = box.querySelector('.lang-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = box.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.lang').forEach(function (b) {
+          b.setAttribute('aria-expanded', 'false');
+          var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+        });
+        box.setAttribute('aria-expanded', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+    });
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.lang').forEach(function (b) {
+        b.setAttribute('aria-expanded', 'false');
+        var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') document.querySelectorAll('.lang').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    });
+
+    // Show mobile language button when the inline nav is hidden
+    function syncLangVisibility() {
+      var mobile = document.getElementById('langMobile');
+      if (!mobile) return;
+      mobile.style.display = window.matchMedia('(max-width: 760px)').matches ? 'block' : 'none';
+    }
+    syncLangVisibility();
+    window.addEventListener('resize', syncLangVisibility);
+
+    // Remember the language a visitor picks, so the root page does not redirect them later.
+    document.querySelectorAll('.lang-menu a[data-lang]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem('preferredLang', a.getAttribute('data-lang')); } catch (err) {}
+      });
+    });
+
+    // --- Email: assemble at runtime to cut down on scraping ---
+    (function () {
+      var user = 'okuhara', domain = 'info.mie-u.ac.jp';
+      var addr = user + '@' + domain;
+      var link = document.getElementById('email-link');
+      if (link) { link.href = 'mailto:' + addr; }
+      var btn = document.getElementById('email-button');
+      if (btn) { btn.href = 'mailto:' + addr; }
+    })();
+  </script>
+</body>
+</html>

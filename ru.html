@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лаборатория Окухара | Взаимодействие человека и ИИ, переговоры и консенсус (Университет Миэ)</title>
+  <meta name="description" content="Лаборатория Окухара, Высшая инженерная школа Университета Миэ. Автоматизированные переговоры, мультиагентные системы, поддержка принятия решений на основе больших языковых моделей и сотрудничество человека и ИИ. Мы принимаем иностранных студентов магистратуры и докторантуры. Поддерживаются государственные и внешние стипендии." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #12304f;
+      --blue: #1f6fb2;
+      --light-blue: #eef6ff;
+      --gray: #f5f7fa;
+      --text: #1d2733;
+      --muted: #65758b;
+      --border: #d8e0ea;
+      --white: #ffffff;
+      --accent: #d79a2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.75;
+      background: var(--white);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-weight: 700; color: var(--navy); letter-spacing: 0.01em; line-height: 1.2; }
+    .logo span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .nav { display: flex; gap: 18px; font-size: 14px; color: var(--navy); align-items: center; }
+    .nav a { padding: 6px 0; }
+    .nav .contact-link { background: var(--navy); color: var(--white); padding: 8px 14px; border-radius: 999px; }
+
+    /* Language dropdown */
+    .lang { position: relative; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--white); color: var(--navy);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 7px 13px; font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
+    }
+    .lang-btn:hover { border-color: var(--blue); }
+    .lang-btn .globe { width: 16px; height: 16px; }
+    .lang-btn .chev { width: 10px; height: 10px; transition: transform 0.2s; }
+    .lang[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; right: 0; top: calc(100% + 8px);
+      min-width: 190px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 14px;
+      box-shadow: 0 18px 44px rgba(18,48,79,0.16);
+      padding: 6px; display: none; list-style: none; margin: 0;
+    }
+    .lang[aria-expanded="true"] .lang-menu { display: block; }
+    .lang-menu a {
+      display: block; padding: 9px 12px; border-radius: 9px; font-size: 15px;
+      color: var(--text); font-family: "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit;
+    }
+    .lang-menu a:hover { background: var(--light-blue); color: var(--navy); }
+    .lang-menu a[aria-current="true"] { font-weight: 700; color: var(--navy); background: var(--gray); }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #f7fbff 0%, #ffffff 50%, #eef6ff 100%); border-bottom: 1px solid var(--border); }
+    .hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 28px; padding: 18px; box-shadow: 0 24px 60px rgba(18,48,79,0.12); }
+    .profile-photo { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: #e7edf5; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .photo-caption { padding: 14px 6px 2px; font-size: 14px; color: var(--muted); margin: 0; }
+    .hero-inner { max-width: 1080px; margin: 0 auto; padding: 48px 24px 54px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); background: var(--light-blue); font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.22; margin: 0 0 18px; color: var(--navy); letter-spacing: -0.02em; max-width: 18ch; }
+    .hero-lead { font-size: 18px; color: #34455b; margin: 0 0 22px; max-width: 60ch; }
+    .hero-name { font-size: 16px; color: var(--navy); font-weight: 700; margin: 0; }
+    .hero-affil { font-size: 14px; color: var(--muted); margin: 4px 0 26px; max-width: 56ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border-radius: 999px; font-weight: 700; border: 1px solid transparent; font-size: 15px; cursor: pointer; }
+    .button.primary { background: var(--navy); color: var(--white); }
+    .button.secondary { background: var(--white); color: var(--navy); border-color: var(--border); }
+    .keyword-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .tag { font-size: 13px; color: var(--navy); background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .gray-section { background: var(--gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    h2 { font-size: clamp(22px, 2.6vw, 30px); color: var(--navy); margin: 0 0 8px; letter-spacing: -0.01em; }
+    .section-intro { color: var(--muted); margin: 0 0 28px; max-width: 64ch; }
+
+    /* Highlighted admissions block */
+    .admit { background: var(--navy); color: #eaf2fb; border-radius: 24px; padding: 36px; }
+    .admit h2 { color: var(--white); }
+    .admit p { color: #cfe0f3; max-width: 62ch; }
+    .admit .button.primary { background: var(--white); color: var(--navy); margin-top: 8px; }
+    .fund-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 22px 0 26px; }
+    .fund-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; padding: 18px; }
+    .fund-card h3 { margin: 0 0 6px; font-size: 16px; color: var(--white); }
+    .fund-card p { margin: 0; font-size: 14px; color: #c3d6ec; }
+    .admit-notes { display: grid; gap: 12px; margin: 18px 0 22px; }
+    .admit-notes p { margin: 0; font-size: 15px; color: #cfe0f3; max-width: 64ch; }
+    .admit-notes strong { color: var(--white); }
+    .tutor-note { font-size: 14px; color: #b9cde6; margin: 4px 0 22px; max-width: 64ch; }
+
+    /* Students we welcome */
+    .welcome-list { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 12px; }
+    .welcome-list li { position: relative; padding-left: 30px; color: #3a4a5e; font-size: 15px; max-width: 70ch; }
+    .welcome-list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); }
+    .welcome-list li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 6px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+
+    /* Research cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card { border: 1px solid var(--border); border-radius: 18px; padding: 22px; background: var(--white); }
+    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--navy); }
+    .card p { margin: 0; font-size: 15px; color: #3a4a5e; }
+    .apply-note { margin-top: 22px; color: var(--muted); font-size: 15px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: start; }
+    .about-photo { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: #e7edf5; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 6%; }
+    .about p { margin: 0 0 14px; }
+    .about-text { max-width: 74ch; }
+    .collab { font-size: 15px; color: #3a4a5e; }
+
+    /* Contact */
+    .contact-box { border: 1px solid var(--border); border-radius: 20px; padding: 30px; background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px 28px; margin: 18px 0 22px; }
+    .contact-grid dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 3px; }
+    .contact-grid dd { margin: 0; font-size: 15px; }
+
+    /* Links / footer */
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .link-card { border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: block; }
+    .link-card:hover { border-color: var(--blue); }
+    .link-card strong { color: var(--navy); display: block; margin-bottom: 4px; }
+    .link-card span { color: var(--muted); font-size: 14px; }
+    footer { background: var(--navy); color: #cfe0f3; padding: 30px 0; font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .admit { padding: 26px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+      .hero-card { order: -1; }
+    }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  
+    .mt-bar { background:#fff7e6; border-bottom:1px solid #f0e0bf; color:#6b5526; font-size:13px; padding:8px 24px; text-align:center; font-family:"Noto Sans Thai","Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", inherit; }
+    .mt-bar a { color:var(--blue); font-weight:700; }
+
+    .talk-aud { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+    .past-h3 { font-size: 16px; color: var(--navy); margin: 30px 0 10px; }
+    .past-list { list-style: none; margin: 0; padding: 0; }
+    .past-list li { padding: 12px 0; border-top: 1px solid var(--border); font-size: 15px; color: #3a4a5e; }
+    .past-date { display: inline-block; min-width: 58px; font-weight: 700; color: var(--navy); margin-right: 8px; }
+    .pdf-link { color: var(--blue); font-weight: 700; white-space: nowrap; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .photo-fig { margin: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--white); }
+    .photo-fig img { width: 100%; height: 240px; object-fit: cover; }
+    .photo-fig figcaption { padding: 12px 16px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="ru.html">Okuhara Laboratory<span>Университет Миэ, Высшая инженерная школа</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">О лаборатории</a>
+        <a href="#research">Исследования</a>
+        <a href="#talks">Доклады</a>
+        <a href="#welcome">Студентам</a>
+        <a href="#admissions">Поступление</a>
+        <a class="contact-link" href="#contact">Контакты</a>
+<div class="lang" id="lang" aria-expanded="false">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+            <span id="langCurrent">Русский</span>
+            <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+          </button>
+          <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru" aria-current="true">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+          <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+          <span>Русский</span>
+          <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu" role="menu" aria-label="Languages">
+            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja">日本語</a></li>
+            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru" aria-current="true">Русский</a></li>
+            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+          </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+        <div class="eyebrow">Университет Миэ · Высшая инженерная школа</div>
+        <h1>Создаём ИИ, который помогает людям достигать согласия</h1>
+        <p class="hero-lead">Лаборатория Окухара занимается автоматизированными переговорами, мультиагентными системами и поддержкой принятия решений на основе больших языковых моделей. Мы создаём ИИ, который работает рядом с людьми и помогает группам принимать решения, а не решает за них.</p>
+        <p class="hero-name">Сюн Окухара, Ph.D.</p>
+        <p class="hero-affil">Лектор, Высшая инженерная школа Университета Миэ · Приглашённый исследователь, Институт перспективных исследований Университета Нагоя</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#admissions">Присоединиться к лаборатории</a>
+          <a class="button secondary" href="#research">Темы исследований</a>
+        </div>
+        <div class="keyword-row">
+          <span class="tag">Автоматизированные переговоры</span>
+          <span class="tag">Мультиагентные системы</span>
+          <span class="tag">Поддержка решений на LLM</span>
+          <span class="tag">Достижение консенсуса</span>
+          <span class="tag">Сотрудничество человека и ИИ</span>
+        </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile photo">
+          <div class="profile-photo"><img src="img/profile-main.jpg" alt="Shun Okuhara" /></div>
+          <p class="photo-caption">Shun Okuhara, Lecturer, Graduate School of Engineering, Mie University</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="wrap">
+        <div class="about-text">
+          <h2>О лаборатории</h2>
+          <p>Лабораторией руководит Сюн Окухара, лектор Высшей инженерной школы Университета Миэ и приглашённый исследователь Института перспективных исследований Университета Нагоя. В 2020 году он получил степень Ph.D. по инженерии в Нагойском технологическом институте и был приглашённым профессором в Карлтонском университете в Канаде.</p>
+          <p class="collab">Среди постоянных соавторов — Такаюки Ито (Университет Киото), Рафик Хадфи и Марк Кляйн (MIT). Лаборатория также поддерживает исследовательские связи с Канадой. Сюн Окухара выступил с приглашённым докладом на совместном семинаре с участием Университета Макгилла и института Mila в Монреале. Кроме того, лаборатория развивает научный обмен с Национальным исследовательским советом Канады, включая исследовательские визиты студентов и пребывание Окухары в качестве приглашённого исследователя.</p>
+          <p class="collab">Мы ценим здоровый темп работы и уважаем карьерный путь каждого студента. Студенты, которые ещё только осваивают ИИ или программирование, тоже приветствуются — при условии готовности учиться и самостоятельно доводить реализацию до конца. Нужны любознательность и готовность работать.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="gray-section">
+      <div class="wrap">
+        <h2>Темы исследований</h2>
+        <p class="section-intro">Наше ядро — поддержка принятия решений и достижение консенсуса. Мы применяем это в образовании, здравоохранении и поддержке пожилых людей, а также в поддержке исследований.</p>
+        <div class="cards">
+          <div class="card"><h3>Автоматизированные переговоры</h3><p>Переговорные агенты, которые представляют интересы людей и ищут соглашения, когда вопросов много и они взаимозависимы.</p></div>
+          <div class="card"><h3>Мультиагентный консенсус</h3><p>Протоколы и системы, которые помогают группам прийти к решению, не позволяя самому громкому голосу доминировать.</p></div>
+          <div class="card"><h3>Поддержка решений на основе LLM</h3><p>Диалоговые агенты на основе больших языковых моделей, которые выявляют, упорядочивают и объясняют, что люди на самом деле предпочитают.</p></div>
+          <div class="card"><h3>Объяснимый, человекоориентированный ИИ</h3><p>Методы, которые делают рассуждения ИИ понятными, чтобы окончательное решение оставалось за человеком.</p></div>
+        </div>
+        <p class="apply-note">Области применения охватывают образование, здравоохранение и поддержку пожилых людей, а также AI for Science. Если ваши интересы близки к этим темам, будем рады обсудить.</p>
+      </div>
+    </section>
+
+    <section id="talks">
+      <div class="wrap">
+        <h2>Доклады и приглашённые лекции</h2>
+        <p class="section-intro">Сюн Окухара принимает приглашения на доклады, семинары и лекции, включая корпоративное обучение, повышение квалификации преподавателей, семинары для местных органов власти и региональных сообществ, научные собрания и просветительские занятия.</p>
+        <div class="cards">
+          <div class="card"><h3>Как ИИ-агенты изменят общество</h3><p>Тенденции в генеративном ИИ, больших языковых моделях и автономных ИИ-агентах и их значение для работы, исследований и образования.</p><p class="talk-aud">Для компаний, университетов и широкой аудитории</p></div>
+          <div class="card"><h3>Достижение консенсуса и поддержка решений с помощью ИИ</h3><p>Как переговорный ИИ, мультиагентные системы и поддержка обсуждений помогают людям принимать решения.</p><p class="talk-aud">Для местных органов власти, компаний и учебных групп</p></div>
+          <div class="card"><h3>AI for Science и автоматизация исследований</h3><p>Как ИИ меняет планирование исследований, обзор литературы, поддержку экспериментов и научное письмо.</p><p class="talk-aud">Для университетов и исследовательских организаций</p></div>
+          <div class="card"><h3>Образование и ИИ-грамотность в эпоху генеративного ИИ</h3><p>Использование генеративного ИИ в высшем образовании и обучении науке о данных: возможности и сложности.</p><p class="talk-aud">Для школ, университетов и преподавателей</p></div>
+        </div>
+        <h3 class="past-h3">Избранные прошлые выступления</h3>
+        <ul class="past-list">
+          <li><span class="past-date">2026.3</span> Семинар по открытой науке, Университет Тохоку. «LLM strategies for the AI for Science era: practical know-how for redesigning the research process.» Организатор — Центр управления исследованиями Университета Тохоку. <a class="pdf-link" href="pdf/tohoku-ai-for-science-2026.pdf" target="_blank" rel="noopener">Афиша</a></li>
+          <li><span class="past-date">2025.8</span> «Agreement Generation from Negotiation Dialogues Using Utility Values and LLMs.» Приглашённая лекция на «Exploring Frontiers in AI», Университет Макгилла и Mila, Монреаль. <a class="pdf-link" href="pdf/mcgill-mila-seminar-2025.pdf" target="_blank" rel="noopener">Постер</a></li>
+          <li><span class="past-date">2022.11</span> «The next step beyond IoT: multi-agent systems and real-world applications.» Семинар промышленности, науки и региона; организаторы — банк Sanjusan, НИИ Sanjusan, Университет Миэ и Торговая палата Йоккаити. <a class="pdf-link" href="pdf/mie-industry-seminar-2022.pdf" target="_blank" rel="noopener">Афиша</a></li>
+          <li><span class="past-date">2022.4</span> Открытый семинар по науке о данных, Университет Миэ (2-й). «Real-world deployment of multi-agent systems as DX spreads: the state and challenges of distributed AI.» Совместно с Комитетом информационного образования и Организацией исследований информационного образования (общеуниверситетский FD). <a class="pdf-link" href="img/ds-seminar-2022.jpg" target="_blank" rel="noopener">Афиша</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="photos" class="gray-section">
+      <div class="wrap">
+        <h2>Деятельность</h2>
+        <p class="section-intro">Кадры с докладов, научных презентаций и международного сотрудничества.</p>
+        <div class="photo-grid">
+          <figure class="photo-fig"><img src="img/talk-photo.jpg" alt="Доклады и научные презентации" /><figcaption>Доклады и научные презентации</figcaption></figure>
+          <figure class="photo-fig"><img src="img/canada-collab.jpg" alt="Международное сотрудничество и семинары с зарубежными исследователями" /><figcaption>Международное сотрудничество и семинары с зарубежными исследователями</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="welcome">
+      <div class="wrap">
+        <h2>Каких студентов мы ждём</h2>
+        <p class="section-intro">Мы рады студентам, которые хотят создавать, проверять и публиковать, из какой бы области они ни пришли.</p>
+        <ul class="welcome-list">
+          <li>Интересуются ИИ, наукой о данных, мультиагентными системами, LLM и сотрудничеством человека и ИИ</li>
+          <li>Способны самостоятельно осваивать новые методы и статьи и вести собственное исследование</li>
+          <li>Готовы программировать (например, на Python) и создавать системы</li>
+          <li>Хотят выступать на международных конференциях и писать статьи на английском</li>
+          <li>Интересуются сочетанием ИИ с другими областями: образованием, здравоохранением, поддержкой пожилых и региональными задачами</li>
+          <li>Комфортно прорабатывают идеи в обсуждении с командой</li>
+        </ul>
+        <p class="apply-note">Мы приветствуем студентов из самых разных областей: не только инженерных, но и информатики, математики, педагогики, психологии, когнитивных и социальных наук. Важнее всего — желание изучать ИИ и информатику и готовность самостоятельно доводить работу до реализации и оценки.</p>
+      </div>
+    </section>
+
+    <section id="admissions">
+      <div class="wrap">
+        <div class="admit">
+          <h2>Иностранные студенты приветствуются</h2>
+          <p>Мы руководим иностранными студентами магистратуры и докторантуры и сотрудничаем с несколькими университетами-партнёрами по всей Азии. Приветствуются и кандидаты не из инженерии, в том числе с гуманитарным или социально-научным образованием. Перед тем как связаться с нами, пожалуйста, прочитайте пункты ниже.</p>
+          <div class="admit-notes">
+            <p><strong>Язык.</strong> Научное руководство ведётся в основном на японском, и владение японским желательно для повседневного руководства и университетских процедур. Мы регулярно работаем с англоязычными статьями и академическим письмом, и при необходимости можно использовать английский.</p>
+            <p><strong>Сначала проверьте требования.</strong> Кандидат сам отвечает за проверку требований к поступлению, языку и успеваемости, установленных Университетом Миэ и каждой стипендиальной программой, до подачи заявки. Если они не выполнены, мы можем быть не в состоянии принять вас или подготовить рекомендательные документы.</p>
+            <p><strong>Приём не гарантирован.</strong> Мы рады обращениям, но обращение, даже подробное, не гарантирует приёма. Мы оцениваем в совокупности владение языком, академическую успеваемость, план исследования и наши возможности по руководству.</p>
+          </div>
+          <div class="fund-grid">
+            <div class="fund-card"><h3>Стипендия MEXT</h3><p>Для подходящих кандидатов доступны пути по рекомендации университета и по рекомендации посольства. Квоты университетской рекомендации ограничены и оцениваются комплексно (язык, оценки, план исследования, соответствие). Обращайтесь заранее, так как сроки наступают задолго до зачисления.</p></div>
+            <div class="fund-card"><h3>Государственные и внешние стипендии</h3><p>Перед подачей проверьте условия участия и языковые требования программы. Если необходимые баллы или условия не выполнены, мы не сможем подготовить документы для руководства.</p></div>
+            <div class="fund-card"><h3>Самофинансирование и научные стажёры</h3><p>Кандидаты на самофинансировании и научные стажёры до зачисления (kenkyusei) рассматриваются индивидуально — с учётом соответствия теме, владения языком, успеваемости и наших возможностей. Предварительная консультация не гарантирует приёма.</p></div>
+          </div>
+          <p class="tutor-note">Новым иностранным студентам магистратуры и докторантуры на первые месяцы после приезда (около трёх месяцев) назначается университетский тьютор, говорящий по-японски, который помогает обустроиться в быту, с японским языком и с началом учёбы по вашему направлению. Дальнейшую поддержку по кредитам, занятиям и исследованию в основном оказывают научный руководитель и лаборатория.</p>
+          <a class="button primary" href="#contact">Написать в лабораторию</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="gray-section">
+      <div class="wrap">
+        <div class="contact-box">
+          <h2>Контакты</h2>
+          <p class="section-intro">По вопросам поступления, исследований или приглашений на доклады пишите напрямую в лабораторию. Чтобы мы ответили быстрее, укажите ваше образование и опыт, научные интересы, желаемый семестр начала и план финансирования (MEXT, другая стипендия, самофинансирование или пока не определились).</p>
+          <dl class="contact-grid">
+            <div><dt>Руководитель</dt><dd>Сюн Окухара, Ph.D.</dd></div>
+            <div><dt>Эл. почта</dt><dd><a id="email-link" href="#contact" style="color:var(--blue);font-weight:700;">okuhara [at] info.mie-u.ac.jp</a></dd></div>
+            <div><dt>Адрес</dt><dd>Faculty of Engineering Bldg. 6, Mie University, 1577 Kurimamachiya-cho, Tsu, Mie 514-8507, Japan</dd></div>
+          </dl>
+          <a class="button primary" id="email-button" href="#contact">Написать в лабораторию</a>
+        </div>
+
+        <h2 style="margin-top:48px;">Дополнительно</h2>
+        <p class="section-intro">Страницы ниже содержат полную информацию. Сайты лаборатории и личный сайт — на японском; публикации на researchmap можно посмотреть на английском.</p>
+        <div class="links">
+          <a class="link-card" href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener"><strong>Публикации (researchmap)</strong><span>Полный список статей и докладов. Доступен показ на английском.</span></a>
+          <a class="link-card" href="https://sites.google.com/view/okuharalab/" target="_blank" rel="noopener"><strong>Сайт лаборатории (яп.)</strong><span>Состав, жизнь лаборатории и информация для студентов.</span></a>
+          <a class="link-card" href="index.html"><strong>Личный сайт (яп.)</strong><span>Доклады, активности и подробная биография.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>Лаборатория Окухара, Высшая инженерная школа, Университет Миэ</div>
+      <div>© 2026 Shun Okuhara</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Language dropdown: click to toggle, click-outside / Esc to close ---
+    document.querySelectorAll('.lang').forEach(function (box) {
+      var btn = box.querySelector('.lang-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = box.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.lang').forEach(function (b) {
+          b.setAttribute('aria-expanded', 'false');
+          var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+        });
+        box.setAttribute('aria-expanded', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+    });
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.lang').forEach(function (b) {
+        b.setAttribute('aria-expanded', 'false');
+        var bb = b.querySelector('.lang-btn'); if (bb) bb.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') document.querySelectorAll('.lang').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    });
+
+    // Show mobile language button when the inline nav is hidden
+    function syncLangVisibility() {
+      var mobile = document.getElementById('langMobile');
+      if (!mobile) return;
+      mobile.style.display = window.matchMedia('(max-width: 760px)').matches ? 'block' : 'none';
+    }
+    syncLangVisibility();
+    window.addEventListener('resize', syncLangVisibility);
+
+    // Remember the language a visitor picks, so the root page does not redirect them later.
+    document.querySelectorAll('.lang-menu a[data-lang]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem('preferredLang', a.getAttribute('data-lang')); } catch (err) {}
+      });
+    });
+
+    // --- Email: assemble at runtime to cut down on scraping ---
+    (function () {
+      var user = 'okuhara', domain = 'info.mie-u.ac.jp';
+      var addr = user + '@' + domain;
+      var link = document.getElementById('email-link');
+      if (link) { link.href = 'mailto:' + addr; }
+      var btn = document.getElementById('email-button');
+      if (btn) { btn.href = 'mailto:' + addr; }
+    })();
+  </script>
+</body>
+</html>
