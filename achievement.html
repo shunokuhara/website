@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <script>
+  (function () {
+    try {
+      var supported = { en:'achievement-en.html', zh:'achievement-zh.html', id:'achievement-id.html', th:'achievement-th.html', vi:'achievement-vi.html', my:'achievement-my.html', ru:'achievement-ru.html', mn:'achievement-mn.html', es:'achievement-es.html', fr:'achievement-fr.html', ko:'achievement-ko.html', ne:'achievement-ne.html', 'zh-Hant':'achievement-zh-tw.html', uz:'achievement-uz.html', km:'achievement-km.html' };
+      var saved = localStorage.getItem('preferredLang');
+      if (saved === 'ja') return;
+      if (saved && supported[saved]) { location.replace(supported[saved]); return; }
+      if (saved) return;
+      var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      var low = nav.toLowerCase();
+      if (low==='zh-tw'||low==='zh-hk'||low==='zh-mo'||low.indexOf('zh-hant')===0) { location.replace('achievement-zh-tw.html'); return; }
+      var code = low.split('-')[0];
+      if (code === 'ja') return;
+      if (supported[code]) location.replace(supported[code]);
+    } catch (e) {}
+  })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>業績リスト | 奥原 俊（三重大学）</title>
   <meta name="description" content="奥原 俊（Shun Okuhara／三重大学 大学院工学研究科 講師）の業績リスト。査読付き論文、国際会議発表、国内発表、講演、著書・翻訳。" />
+  <link rel="alternate" hreflang="ja" href="achievement.html" />
+  <link rel="alternate" hreflang="en" href="achievement-en.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="achievement-zh.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="achievement-zh-tw.html" />
+  <link rel="alternate" hreflang="vi" href="achievement-vi.html" />
+  <link rel="alternate" hreflang="ko" href="achievement-ko.html" />
+  <link rel="alternate" hreflang="id" href="achievement-id.html" />
+  <link rel="alternate" hreflang="my" href="achievement-my.html" />
+  <link rel="alternate" hreflang="th" href="achievement-th.html" />
+  <link rel="alternate" hreflang="mn" href="achievement-mn.html" />
+  <link rel="alternate" hreflang="ru" href="achievement-ru.html" />
+  <link rel="alternate" hreflang="uz" href="achievement-uz.html" />
+  <link rel="alternate" hreflang="es" href="achievement-es.html" />
+  <link rel="alternate" hreflang="fr" href="achievement-fr.html" />
+  <link rel="alternate" hreflang="ne" href="achievement-ne.html" />
+  <link rel="alternate" hreflang="km" href="achievement-km.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Khmer:wght@400;600&display=swap" rel="stylesheet" />
@@ -158,15 +191,14 @@
     .pub-list.review li::before { content: "–"; }
     .pub-year { order: -1; padding: 0; }
     }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans Thai", "Noto Sans Myanmar", "Noto Sans KR", "Noto Sans Devanagari", "Noto Sans Khmer", sans-serif; }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="logo" href="index.html">
-        奥原 俊 研究室
-        <span>Mie University / Okuhara Laboratory</span>
-      </a>
+      <a class="logo" href="index.html">奥原 俊 研究室
+        <span>Mie University / Okuhara Laboratory</span></a>
       <nav class="nav" aria-label="主要ナビゲーション">
         <a href="index.html">ホーム</a>
         <a href="index.html#research">研究</a>
@@ -175,51 +207,47 @@
         <a href="achievement.html" aria-current="page" style="color:var(--blue);font-weight:700;">業績</a>
         <a class="contact-link" href="index.html#contact">問い合わせ</a>
         <div class="lang" id="lang" aria-expanded="false">
-          <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
-            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
-          </button>
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language"><svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
           <ul class="lang-menu" role="menu" aria-label="Languages">
-            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
-            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
-            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
-            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
-            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
-            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
-            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
-            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
-            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
-            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
-            <li role="none"><a role="menuitem" href="km.html" lang="km" data-lang="km">ភាសាខ្មែរ</a></li>
+            <li role="none"><a role="menuitem" href="achievement.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
+            <li role="none"><a role="menuitem" href="achievement-en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="achievement-zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="achievement-zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="achievement-vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="achievement-id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="achievement-my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="achievement-th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="achievement-mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="achievement-uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="achievement-es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="achievement-fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+            <li role="none"><a role="menuitem" href="achievement-km.html" lang="km" data-lang="km">ភាសាខ្មែរ</a></li>
           </ul>
         </div>
       </nav>
       <div class="lang" id="langMobile" aria-expanded="false" style="display:none;">
-        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">
-          <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
-        </button>
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language"><svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg><span>日本語</span><svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg></button>
         <ul class="lang-menu" role="menu" aria-label="Languages">
-            <li role="none"><a role="menuitem" href="index.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
-            <li role="none"><a role="menuitem" href="en.html" lang="en" data-lang="en">English</a></li>
-            <li role="none"><a role="menuitem" href="zh.html" lang="zh" data-lang="zh">简体中文</a></li>
-            <li role="none"><a role="menuitem" href="zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
-            <li role="none"><a role="menuitem" href="vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
-            <li role="none"><a role="menuitem" href="ko.html" lang="ko" data-lang="ko">한국어</a></li>
-            <li role="none"><a role="menuitem" href="id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
-            <li role="none"><a role="menuitem" href="my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
-            <li role="none"><a role="menuitem" href="th.html" lang="th" data-lang="th">ไทย</a></li>
-            <li role="none"><a role="menuitem" href="mn.html" lang="mn" data-lang="mn">Монгол</a></li>
-            <li role="none"><a role="menuitem" href="ru.html" lang="ru" data-lang="ru">Русский</a></li>
-            <li role="none"><a role="menuitem" href="uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
-            <li role="none"><a role="menuitem" href="es.html" lang="es" data-lang="es">Español</a></li>
-            <li role="none"><a role="menuitem" href="fr.html" lang="fr" data-lang="fr">Français</a></li>
-            <li role="none"><a role="menuitem" href="ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
-            <li role="none"><a role="menuitem" href="km.html" lang="km" data-lang="km">ភាសាខ្មែរ</a></li>
-          </ul>
+            <li role="none"><a role="menuitem" href="achievement.html" lang="ja" data-lang="ja" aria-current="true">日本語</a></li>
+            <li role="none"><a role="menuitem" href="achievement-en.html" lang="en" data-lang="en">English</a></li>
+            <li role="none"><a role="menuitem" href="achievement-zh.html" lang="zh" data-lang="zh">简体中文</a></li>
+            <li role="none"><a role="menuitem" href="achievement-zh-tw.html" lang="zh-Hant" data-lang="zh-Hant">繁體中文</a></li>
+            <li role="none"><a role="menuitem" href="achievement-vi.html" lang="vi" data-lang="vi">Tiếng Việt</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ko.html" lang="ko" data-lang="ko">한국어</a></li>
+            <li role="none"><a role="menuitem" href="achievement-id.html" lang="id" data-lang="id">Bahasa Indonesia</a></li>
+            <li role="none"><a role="menuitem" href="achievement-my.html" lang="my" data-lang="my">မြန်မာဘာသာ</a></li>
+            <li role="none"><a role="menuitem" href="achievement-th.html" lang="th" data-lang="th">ไทย</a></li>
+            <li role="none"><a role="menuitem" href="achievement-mn.html" lang="mn" data-lang="mn">Монгол</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ru.html" lang="ru" data-lang="ru">Русский</a></li>
+            <li role="none"><a role="menuitem" href="achievement-uz.html" lang="uz" data-lang="uz">Oʻzbekcha</a></li>
+            <li role="none"><a role="menuitem" href="achievement-es.html" lang="es" data-lang="es">Español</a></li>
+            <li role="none"><a role="menuitem" href="achievement-fr.html" lang="fr" data-lang="fr">Français</a></li>
+            <li role="none"><a role="menuitem" href="achievement-ne.html" lang="ne" data-lang="ne">नेपाली</a></li>
+            <li role="none"><a role="menuitem" href="achievement-km.html" lang="km" data-lang="km">ភាសាខ្មែរ</a></li>
+        </ul>
       </div>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><rect y="0" width="18" height="2" rx="1"></rect><rect y="6" width="18" height="2" rx="1"></rect><rect y="12" width="18" height="2" rx="1"></rect></svg>
@@ -227,7 +255,6 @@
       </button>
     </div>
   </header>
-
 
   <main>
     <section class="page-hero" style="padding:0;border-bottom:none;">
@@ -238,8 +265,8 @@
           <p class="ph-lead">査読付き論文、国際会議発表、国内学会発表、講演、著書・翻訳の一覧です。最新の情報は researchmap にもまとめています。</p>
           <div class="ph-stats">
             <div class="ph-stat"><b>30</b>論文誌（査読付き）</div>
-            <div class="ph-stat"><b>14</b>国際会議（査読付き）</div>
-            <div class="ph-stat"><b>108</b>掲載件数（全体）</div>
+            <div class="ph-stat"><b>15</b>国際会議（査読付き）</div>
+            <div class="ph-stat"><b>112</b>掲載件数（全体）</div>
           </div>
           <a class="ph-back" href="index.html">← ホームに戻る</a>
         </div>
@@ -252,10 +279,11 @@
         <ul>
           <li><a href="#journal-en">英文論文誌（査読付き）<span class="n">18</span></a></li>
           <li><a href="#journal-ja">和文論文誌（査読付き）<span class="n">12</span></a></li>
-          <li><a href="#intl-conf">国際会議（査読付き）<span class="n">14</span></a></li>
+          <li><a href="#intl-conf">国際会議（査読付き）<span class="n">15</span></a></li>
           <li><a href="#nonref">国際会議・ワークショップ等（査読なし）<span class="n">12</span></a></li>
           <li><a href="#domestic">国内学会・シンポジウム発表<span class="n">36</span></a></li>
-          <li><a href="#talks">講座・講演<span class="n">13</span></a></li>
+          <li><a href="#talks">講座・講演<span class="n">14</span></a></li>
+          <li><a href="#outreach">出前授業・高校連携<span class="n">2</span></a></li>
           <li><a href="#books">共著書・翻訳・編集<span class="n">3</span></a></li>
         </ul>
         <p class="ext">最新情報：<a href="https://researchmap.jp/okuhara_shun" target="_blank" rel="noopener">researchmap</a></p>
@@ -305,8 +333,9 @@
       </section>
       <section class="pub-section" id="intl-conf">
         <div class="label">International Conferences (Refereed)</div>
-        <h2>国際会議（査読付き）<span class="count">14件</span></h2>
+        <h2>国際会議（査読付き）<span class="count">15件</span></h2>
         <ol class="pub-list">
+            <li><p class="pub-text"><span class="pub-au"><strong>Shun Okuhara</strong>, Takayuki Ito</span> <span class="pub-ti">&ldquo;Generative Negotiation for Creative Agreements in Multi-Agent Systems&rdquo;</span> <span class="pub-ve">HHAI 2026: The 5th International Conference on Hybrid Human-Artificial Intelligence, Frontiers in Artificial Intelligence and Applications, 423, pp.176-185</span> <a class="pub-doi" href="https://doi.org/10.3233/FAIA260503" target="_blank" rel="noopener">DOI</a></p><span class=pub-year>2026</span></li>
             <li><p class="pub-text"><span class="pub-au"><strong>Shun Okuhara</strong>, Takayuki Ito, Gaozhi Xiao</span> <span class="pub-ti">&ldquo;MBNP: A Multi-bid Protocol for Integrating Matching and Negotiation in Constraint-based Environments&rdquo;</span> <span class="pub-ve">2025 IEEE International Conference on Agentic AI (ICA), pp.36-41</span> <a class="pub-doi" href="https://ieeexplore.ieee.org/document/11352727" target="_blank" rel="noopener">Link</a></p><span class=pub-year>2025</span></li>
             <li><p class="pub-text"><span class="pub-au">Ling Bai, Zirui Lin, Zheng Liu, Pengcheng Xi, Gaozhi George Xiao, <strong>Shun Okuhara</strong></span> <span class="pub-ti">&ldquo;Llama3-SISE: An LLM-based Pipeline for Preclinical Staging of Alzheimer's Disease&rdquo;</span> <span class="pub-ve">pp.232-235, 2025</span></p><span class=pub-year>2025</span></li>
             <li><p class="pub-text"><span class="pub-au"><strong>Shun Okuhara</strong>, Takayuki Ito</span> <span class="pub-ti">&ldquo;From Argument to Deliberation: Evaluating AI Dialogue with the Discourse Quality Index&rdquo;</span> <span class="pub-ve">The 20th International Conference on Knowledge, Information and Creativity Support Systems (KICSS 2025), IEICE Proceeding Series, 95, pp.293-303</span></p><span class=pub-year>2025</span></li>
@@ -385,8 +414,9 @@
       </section>
       <section class="pub-section" id="talks">
         <div class="label">Lectures / Talks</div>
-        <h2>講座・講演<span class="count">13件</span></h2>
+        <h2>講座・講演<span class="count">14件</span></h2>
         <ol class="pub-list">
+            <li><p class="pub-text">Agentic AI（5日間の集中講義）, NMIMS Mukesh Patel School of Technology Management and Engineering（インド・ムンバイ）, 2026.9</p><span class=pub-year>2026</span></li>
             <li><p class="pub-text">AI for Science時代のLLM活用戦略：研究プロセスを再設計する実践知, 東北大学 オープンサイエンスセミナー「AI for Science」, 東北大学リサーチ・マネジメントセンター, 2026.3</p><span class=pub-year>2026</span></li>
             <li><p class="pub-text">Agreement Generation from Negotiation Dialogues Using Utility Values and LLMs（招待講演）, Exploring Frontiers in AI, McGill University・Mila, Montreal, 2025.8</p><span class=pub-year>2025</span></li>
             <li><p class="pub-text">IoTの次のステップ～マルチエージェントと実応用～, 令和４年度 三重大学と地元企業との連携セミナー『デジタルデータの活用によりビジネスチャンスをつかむ』, <strong>奥原 俊</strong>，三十三銀行、三十三総研、三重大学、及び四日市商工会議所, 2022,11.21</p><span class=pub-year>2022</span></li>
@@ -400,6 +430,14 @@
             <li><p class="pub-text">Pythonプログラミングの入門，名古屋工業大学 NITech AI 研究センター , AIコンソーシアム, 2020,9.15</p><span class=pub-year>2020</span></li>
             <li><p class="pub-text">Pythonプログラミング（基礎，機械学習のライブラリ，物体検出），名古屋工業大学 NITech AI 研究センター , 豊田人材育成プログラム, 2020,7.21, 8.04, 9.29</p><span class=pub-year>2020</span></li>
             <li><p class="pub-text">次世代教育システムによる資源消費の抑制についての考察，名古屋工業大学グリーンコンピューティング研究所 内閣府最先端次世代研究開発プロジェクト「環境社会最適化シミュレーションを可能にする社会最適化アルゴリズム創出とその応用」, 名古屋工業大学グリーンコンピューティング研究所セミナー「グリーン・コンピューティング基礎技術と動向」, 2011,9.14</p><span class=pub-year>2011</span></li>
+        </ol>
+      </section>
+      <section class="pub-section" id="outreach">
+        <div class="label">Outreach</div>
+        <h2>出前授業・高校連携<span class="count">2件</span></h2>
+        <ol class="pub-list">
+            <li><p class="pub-text"><span class="pub-status">予定</span><span class="pub-ti">「マルチエージェント技術の応用とその展望」</span> <span class="pub-ve">三重県立四日市西高等学校（2年生対象）, 2026.12.17</span></p><span class=pub-year>2026</span></li>
+            <li><p class="pub-text"><span class="pub-ti">「学部説明：三重大学工学部の入試制度と学び、進路」</span> <span class="pub-ve">暁高等学校（三重大学進学希望者対象）, 2025.7.15</span></p><span class=pub-year>2025</span></li>
         </ol>
       </section>
       <section class="pub-section" id="books">
